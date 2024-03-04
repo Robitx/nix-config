@@ -60,15 +60,15 @@
                   mountpoint = "/nix";
                 };
 
-                # "/backup" = {
-                #   mountOptions = ["subvol=backup" "noatime"];
-                #   mountpoint = "/backup";
-                # };
+                "/backup" = {
+                  mountOptions = ["subvol=backup" "noatime"];
+                  mountpoint = "/backup";
+                };
 
-                # "/plex" = {
-                #   mountOptions = ["subvol=plex" "noatime"];
-                #   mountpoint = "/plex";
-                # };
+                "/plex" = {
+                  mountOptions = ["subvol=plex" "noatime"];
+                  mountpoint = "/plex";
+                };
 
               };
             };

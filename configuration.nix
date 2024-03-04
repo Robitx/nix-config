@@ -193,7 +193,7 @@
     isNormalUser = true;
     # initialPassword = "dummypassword";
     extraGroups = [ "networkmanager" "wheel" "docker" "nix" ]; # Enable ‘sudo’ for the user.
-    hashedPasswordFile = "/persist/nixos/passwords/tibor";
+    hashedPasswordFile = "/persist/nix-config/passwords/tibor";
     shell = pkgs.zsh;
     uid = 1000;
   };

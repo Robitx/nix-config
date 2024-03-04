@@ -151,7 +151,7 @@
     shellAliases = {
       lah = "ls -lah";
       vim = "nvim";
-      update = "sudo nixos-rebuild boot --flake /persist/nixos#default";
+      update = "sudo nixos-rebuild boot --impure --flake /persist/nix-config#default";
     };
   };
 
