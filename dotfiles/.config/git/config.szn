@@ -1,0 +1,7 @@
+[user]
+	name = Schmidt, Tibor
+	email = tibor.schmidt@firma.seznam.cz
+[url "ssh://git@gitlab.seznam.net/"]
+	insteadOf = https://gitlab.seznam.net/
+[url "ssh://git@gitlab.seznam.net"]
+	insteadOf = https://gitlab.seznam.net

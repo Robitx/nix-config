@@ -32,12 +32,26 @@
   # };
 
   # Enable the X11 windowing system.
-  services.xserver.enable = true;
+  # services.xserver.enable = true;
 
 
   # Enable the GNOME Desktop Environment.
-  services.xserver.displayManager.gdm.enable = true;
-  services.xserver.desktopManager.gnome.enable = true;
+  # services.xserver.displayManager.gdm.enable = true;
+  # services.xserver.desktopManager.gnome.enable = true;
+
+  hardware = {
+    opengl.enable = true;
+  };
+
+  programs.hyprland = {
+    enable = true;
+    xwayland.enable = true;
+  };
+
+  xdg.portal = {
+    enable = true;
+    extraPortals = [ pkgs.xdg-desktop-portal-hyprland ];
+  };
 
   nixpkgs.config.allowUnfree = true;
 
@@ -78,28 +92,36 @@
   # $ nix search wget
    environment.systemPackages = with pkgs; [
      # waybar
-     # mako
-     # swww
-     # rofi-wayland
-     # wl-clipboard
+     # (waybar.overrideAttrs (oldAttrs: {
+     #     mesonFlags = oldAttrs.mesonFlags ++ [ "-Dexperimental=true" ];
+     #   })
+     # )
+
+     mako
+     libnotify
+     rofi-wayland
+     wl-clipboard
 
    ];
 
-   #xdg.portal = {
-   #  enable = true;
-   #  extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
-   #};
+   security = {
+     rtkit.enable = true;
+     pki.certificates = [
+     ''
+     ${builtins.readFile /persist/myconfs/root2022.pem}
+     ''
+     ];
+   };
 
-   #sound.enable = true;
-   #security.rtkit.enable = true;
-   #services.pipewire = {
-   #  enable = true;
-   #  alsa.enable = true;
-   #  alsa.support32Bit = true;
-   #  pulse.enable = true;
-   #  jack.enable = true;
+   sound.enable = true;
+   services.pipewire = {
+     enable = true;
+     alsa.enable = true;
+     alsa.support32Bit = true;
+     pulse.enable = true;
+     jack.enable = true;
    
-   #};
+   };
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
@@ -205,10 +227,6 @@
 
 
 
-  # programs.hyprland = {
-  #   enable = true;
-  #    xwayland.enable = true;
-  # };
  
 
 }

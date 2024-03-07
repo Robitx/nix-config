@@ -1,0 +1,9 @@
+[user]
+	name = Tibor Schmidt
+	email = robitx@gmail.com
+[push]
+	default = simple
+	autoSetupRemote = true
+
+[includeIf "gitdir:/backup/szngit/"]
+	path = config.szn

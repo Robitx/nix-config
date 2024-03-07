@@ -1,0 +1,164 @@
+########################################################################
+# my functions and aliases
+########################################################################
+alias ls='ls --color=auto'
+alias la='ls -la --color=auto'
+alias lah='ls -lah --color=auto'
+
+alias grep='grep --color=auto'
+alias wget='wget --no-check-certificate'
+alias gd='git difftool --tool=vimdiff'
+
+alias ssh='ssh -o TCPKeepAlive=yes -o ServerAliveCountMax=20 -o ServerAliveInterval=15 -A -X'
+
+alias vim="nvim"
+alias vimdiff="nvim -d"
+alias tree="tree -a -I node_modules -I .git"
+
+smart_touch() {
+    for file in "$@"; do
+        mkdir -p "$(dirname "$file")"
+        touch "$file"
+    done
+}
+alias touch="smart_touch"
+
+
+alias hm='home-manager'
+alias hmd='cd ~/.config/home-manager'
+alias hmu='hmd; nix flake update'
+
+if [[ "$RUNNING_IN_DOCKER" != "true" ]]; then
+
+    alias sg='cd /backup/szngit'
+    alias cg='cd /backup/DataCube/Cogiter/'
+    alias pg='cd /backup/pgit'
+
+    alias xrandrhdmi='xrandr --output HDMI1 --auto --right-of eDP1'
+    alias xrandrwork='xrandr --output HDMI-2 --auto --right-of eDP-1'
+    alias xrandrdok='xrandr --output HDMI1 --mode 2560x1440 --right-of eDP1;
+    xrandr --output DP1-2 --mode 2560x1440 --right-of HDMI1'
+    alias xrandrp='xrandr --output DP1 --mode 2560x1440 --right-of eDP1;
+    xrandr --output HDMI1 --mode 1920x1080 --right-of DP1'
+    alias xrandrhome='xrandr --output DP-4 --mode 2560x1440 --primary;
+    xrandr --output DP-2 --mode 1920x1200 --right-of DP-4 --rotate left'
+    alias brightness='xbacklight -set'
+    alias monitoroff='sleep 1 && xset dpms force off'
+
+    alias yaourtupgrade='yaourt -Syu --aur'
+
+    alias o='xdg-open'
+
+    alias probe2json='sed -e "s/^[^|]*|\t//" | jq .'
+    alias escurl='curl --cacert /backup/szngit/stuff/esaas-certs/ca_ec.cert --cert /backup/szngit/stuff/esaas-certs/esaas-email-antispam-scripts.crt --key /backup/szngit/stuff/esaas-certs/esaas-email-antispam-scripts.key  -H "Content-Type: application/json" --silent'
+
+    alias tiborgj="ssh tiborg@tiborgj.email-dev.ko1.os.scif.cz -t 'export tp=$tp; bash'"
+    alias tiborg_old="ssh tiborg@tiborgs.email-dev.ko1.os.scif.cz -t 'export tp=$tp; bash'"
+    alias tiborg="ssh tiborg@tibor-buster.email-dev.ko1.os.scif.cz -t 'export tp=$tp; bash'"
+    alias otiborg='ssh tiborg@tiborgj.dev'
+    # alias anomon='ssh tiborg@anomon.email-dev.ko1.os.scif.cz'
+    alias anomon="ssh tiborg@anomon.email-dev.ko1.os.scif.cz -t 'export tp=$tp; bash'"
+    alias bdt='ssh tiborg@rcptdb3.dev.dszn.cz'
+    alias cdh5='ssh root@email-hadoop-cdh5-5.dev.dszn.cz'
+    alias eml='ssh tiborg@eml.dev.dszn.cz'
+    alias lorien='ssh root@vs-lorien.dev.dszn.cz'
+    # alias elastic='ssh root@elastic.dev'
+    # alias kibana='ssh tiborg@kibana.dev'
+    # alias rhovanion='ssh tiborg@rhovanion.dev'
+    # alias rhovanionj='ssh tiborg@email-jessie-builder.dev'
+
+    alias anomon_mount='sshfs -o allow_other,follow_symlinks,auto_cache,reconnect,ServerAliveInterval=1,no_readahead tiborg@anomon.email-dev.ko1.os.scif.cz:/home/tiborg /mnt/anomon -C; cd /mnt/anomon/'
+    alias otiborg_mount='sshfs -o allow_other,follow_symlinks,auto_cache,reconnect,ServerAliveInterval=1,no_readahead tiborg@tiborgj.dev:/home/tiborg /mnt/otiborg -C; cd /mnt/otiborg/'
+    alias tiborgj_mount='sshfs -o allow_other,follow_symlinks,auto_cache,reconnect,ServerAliveInterval=1,no_readahead tiborg@tiborgj.email-dev.ko1.os.scif.cz:/home/tiborg /mnt/tiborgj -C; cd /mnt/tiborgj/'
+    alias tiborg_mount_old='sshfs -o follow_symlinks,auto_cache,reconnect,ServerAliveInterval=1,no_readahead tiborg@tiborgs.email-dev.ko1.os.scif.cz:/home/tiborg /mnt/tiborg -C; cd /mnt/tiborg_old/'
+    alias tiborg_mount='sshfs -o follow_symlinks,auto_cache,reconnect,ServerAliveInterval=1,no_readahead tiborg@tibor-buster.email-dev.ko1.os.scif.cz:/home/tiborg /mnt/tiborg -C; cd /mnt/tiborg/'
+    alias babuska_mount='sshfs -o allow_other,follow_symlinks,auto_cache,reconnect,ServerAliveInterval=1,no_readahead tiborg@babuska.dev:/home/tiborg /mnt/babuska -C; cd /mnt/babuska/'
+    alias rhovanionj_mount='sshfs -o allow_other,follow_symlinks,auto_cache,reconnect,ServerAliveInterval=1,no_readahead tiborg@email-jessie-builder.dev:/home/tiborg /mnt/rhovanionj -C; cd /mnt/rhovanionj/'
+    alias bdt_mount='sshfs -o allow_other,follow_symlinks,auto_cache,reconnect,ServerAliveInterval=1,no_readahead tiborg@rcptdb3.dev.dszn.cz:/home/tiborg /mnt/bdt -C; cd /mnt/bdt/'
+    # alias eml_mount='sshfs -o follow_symlinks,auto_cache,reconnect,ServerAliveInterval=1,no_readahead root@eml.dev.dszn.cz:/root/ /mnt/eml -C; cd /mnt/eml/'
+    alias eml_mount='sshfs -o allow_other,follow_symlinks,auto_cache,reconnect,ServerAliveInterval=1,no_readahead tiborg@eml.dev.dszn.cz:/home/tiborg /mnt/eml -C; cd /mnt/eml/'
+
+
+    # if [[ "$(uname)" != "Darwin" ]]; then
+    #     alias kben='setxkbmap us';
+    #     alias kbcz='setxkbmap cz';
+    #     setxkbmap -option caps:none;
+    # fi
+
+
+    alias lgo="docker run --rm docker.ops.iszn.cz/email-dev/lg:latest"
+    alias lg="/backup/szngit/lg/lg"
+
+fi
+
+
+function reverse_ip(){
+    echo "$1" | awk 'BEGIN{FS="."}{print $4"."$3"."$2"."$1}'
+}
+
+
+if [[ "RUNNING_IN_DOCKER" != "true" ]]; then
+    export GOPATH=/backup/go
+fi
+export GOPRIVATE="gitlab.seznam.net"
+export GO111MODULE=on
+# export GOPROXY=http://golang-mirror:3000
+
+# PATH="$PATH:$HOME/fake-pydoop"
+PATH="$PATH:/backup/szngit/stuff"
+# export PATH="$PATH:/usr/bin/pydoc"
+export PATH="$PATH:$GOPATH/bin"
+export PATH="$PATH:$HOME/.local/bin"
+export PATH="$PATH:/opt/cuda/bin"
+export PATH="$PATH:$HOME/.cargo/bin"
+
+# OPENSTACK SETTINGS
+export OS_USERNAME=tibor.schmidt
+export OS_PASSWORD=$tp
+export OS_PROJECT_NAME=email-dev
+export OS_USER_DOMAIN_NAME=Default
+export OS_PROJECT_DOMAIN_NAME=Default
+export OS_AUTH_URL=https://api.ko1.os.ops.iszn.cz:5000/v3/
+export OS_IDENTITY_API_VERSION=3
+
+export EDITOR="nvim"
+export JAVA_HOME="/usr/lib/jvm/java-14-openjdk"
+export PYSPARK_PYTHON=python2.7
+export OPENAI_API_KEY=$openai_api_key
+export GOOGLEAI_API_KEY=$googleai_api_key
+export PPLX_API_KEY=$pplx_api_key
+export TERM=screen-256color
+
+if [ -n "$DESKTOP_SESSION" ];then
+    eval $(gnome-keyring-daemon --start --components=pkcs11,secrets,ssh 2>/dev/null)
+    export SSH_AUTH_SOCK
+    export XDG_CURRENT_DESKTOP=GNOME
+fi
+
+export APPIMAGE_EXTRACT_AND_RUN=1
+export NO_CLEANUP=1
+export OLLAMA_MODELS="/backup/ollama_models"
+
+
+# export PS1='%~$ '
+# disable ctrl+S ctrl+Q behavior in terminal
+stty -ixon
+
+
+
+# if [[ "$(uname)" == "Darwin" ]]; then
+#     export NVM_DIR="$HOME/.nvm"
+#     [ -s "$HOMEBREW_PREFIX/opt/nvm/nvm.sh" ] && \. "$HOMEBREW_PREFIX/opt/nvm/nvm.sh" # This loads nvm
+#     [ -s "$HOMEBREW_PREFIX/opt/nvm/etc/bash_completion.d/nvm" ] && \. "$HOMEBREW_PREFIX/opt/nvm/etc/bash_completion.d/nvm" # This loads nvm bash_completion
+# elif [[ "$RUNNING_IN_DOCKER" != "true" ]]; then
+#     source /usr/share/nvm/init-nvm.sh
+# else
+#     export NVM_DIR="$HOME/.nvm"
+#     [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+#     [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nv
+# fi
+
+
+# export LD_PRELOAD='/usr/$LIB/libstdc++.so.6 /usr/$LIB/libgcc_s.so.1 /usr/$LIB/libxcb.so.1 /usr/$LIB/libgpg-error.so'
+
+# zprof
