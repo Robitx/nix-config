@@ -76,7 +76,25 @@
         "disko": "disko",
         "home-manager": "home-manager",
         "impermanence": "impermanence",
-        "nixpkgs": "nixpkgs"
+        "nixpkgs": "nixpkgs",
+        "zsh-autocomplete": "zsh-autocomplete"
+      }
+    },
+    "zsh-autocomplete": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1702543845,
+        "narHash": "sha256-u2BnkHZOSGVhcJvhGwHBdeAOVdszye7QZ324xinbELE=",
+        "owner": "marlonrichert",
+        "repo": "zsh-autocomplete",
+        "rev": "c7b65508fd3a016dc9cdb410af9ee7806b3f9be1",
+        "type": "github"
+      },
+      "original": {
+        "owner": "marlonrichert",
+        "ref": "main",
+        "repo": "zsh-autocomplete",
+        "type": "github"
       }
     }
   },

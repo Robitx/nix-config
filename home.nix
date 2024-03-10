@@ -36,6 +36,8 @@
       ".config/hypr"
       ".config/waybar"
       ".tmux/plugins"
+      ".local/share/nvim"
+      ".local/state/nvim"
       {
         directory = ".local/share/Steam";
         method = "symlink";
@@ -81,8 +83,7 @@
     # # configuration. For example, this adds a command 'my-hello' to your
     # # environment:
     # (pkgs.writeShellScriptBin "my-hello" ''
-    #   echo "Hello, ${config.home.username}!"
-    # '')
+    #   echo "Hello, ${config.home.username}!" '')
 
     openvpn
     networkmanager
@@ -102,6 +103,10 @@
 
     vscode
 
+    go
+    gopls
+    golint
+
     git
     tig
 
@@ -114,15 +119,40 @@
     dig
     geoip
     whois
+    ipcalc
+    ripgrep
+    fd
+    nodejs_18
+    luajitPackages.luarocks
+
+    gnumake
+
+
+    ccal
+
+    p7zip
+    cabextract
+    unrar
+    unzip
+    zip
+    xz
+    zstd
+
+    grim
+    slurp
 
 
 
     nerdfonts
     # jetbrains-mono
 
+    tree-sitter
+    fzf
+    vimPlugins.telescope-fzf-native-nvim
 
     wget
     curl
+    sshfs
     
     kitty
 
@@ -136,11 +166,18 @@
 
     gimp
 
+    sox
     vlc
 
     # python311Full
     (python311.withPackages (p: with p; [
       python
+      pytz
+      websockets
+      urwid
+      requests
+      tzlocal
+      certifi
       docopt
       elastic-transport
       elasticsearch
@@ -148,6 +185,7 @@
       pysocks
       urllib3
       pip
+      black
       aiohttp # async HTTP
       beautifulsoup4 # web scraping
       ipython # interactive shell
@@ -158,7 +196,6 @@
       pandas # data analysis
       pylint # static checking
       pwntools
-      requests # HTTP library
       setuptools # setup.py
       scipy
       scikit-learn
@@ -214,14 +251,17 @@
 
   programs.zsh = {
     enable = true;
-    enableCompletion = true;
-    enableAutosuggestions = true;
+    enableCompletion = false;
+    enableAutosuggestions = false;
+    plugins = [
+      { name = "zsh-autocomplete"; src = inputs.zsh-autocomplete; }
+    ];
     syntaxHighlighting = {
       enable = true;
     };
     shellAliases = {
       lah = "ls -lah";
-      update = "sudo nixos-rebuild boot --impure --flake '/persist/nix-config#default'";
+      update = "sudo nixos-rebuild boot --impure --flake '/persist/nix-config#'$(hostname)";
       history = "history 0";
       history-stat = "history | awk '{print \$2}' | sort | uniq -c | sort -n -r | head";
     };
@@ -305,6 +345,11 @@
     vimAlias = true;
     vimdiffAlias = true;
   };
+
+  # xdg.configFile.nvim.source = /persist/nvim;
+  # xdg.configFile.nvim.recursive = true;
+  home.file.".config/nvim".source = config.lib.file.mkOutOfStoreSymlink  /persist/nvim;
+  home.file.".config/nvim".recursive = true;
 
   home.file.".config/kitty/kitty.conf".source = ./dotfiles/.config/kitty/kitty.conf;
   # programs.kitty = {

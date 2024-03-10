@@ -54,7 +54,7 @@ if [[ "$RUNNING_IN_DOCKER" != "true" ]]; then
 
     alias tiborgj="ssh tiborg@tiborgj.email-dev.ko1.os.scif.cz -t 'export tp=$tp; bash'"
     alias tiborg_old="ssh tiborg@tiborgs.email-dev.ko1.os.scif.cz -t 'export tp=$tp; bash'"
-    alias tiborg="ssh tiborg@tibor-buster.email-dev.ko1.os.scif.cz -t 'export tp=$tp; bash'"
+    alias tiborg="ssh tiborg@tibor-bookworm.email-dev.ko1.os.scif.cz -t 'export tp=$tp; bash'"
     alias otiborg='ssh tiborg@tiborgj.dev'
     # alias anomon='ssh tiborg@anomon.email-dev.ko1.os.scif.cz'
     alias anomon="ssh tiborg@anomon.email-dev.ko1.os.scif.cz -t 'export tp=$tp; bash'"
@@ -67,16 +67,16 @@ if [[ "$RUNNING_IN_DOCKER" != "true" ]]; then
     # alias rhovanion='ssh tiborg@rhovanion.dev'
     # alias rhovanionj='ssh tiborg@email-jessie-builder.dev'
 
-    alias anomon_mount='sshfs -o allow_other,follow_symlinks,auto_cache,reconnect,ServerAliveInterval=1,no_readahead tiborg@anomon.email-dev.ko1.os.scif.cz:/home/tiborg /mnt/anomon -C; cd /mnt/anomon/'
-    alias otiborg_mount='sshfs -o allow_other,follow_symlinks,auto_cache,reconnect,ServerAliveInterval=1,no_readahead tiborg@tiborgj.dev:/home/tiborg /mnt/otiborg -C; cd /mnt/otiborg/'
-    alias tiborgj_mount='sshfs -o allow_other,follow_symlinks,auto_cache,reconnect,ServerAliveInterval=1,no_readahead tiborg@tiborgj.email-dev.ko1.os.scif.cz:/home/tiborg /mnt/tiborgj -C; cd /mnt/tiborgj/'
-    alias tiborg_mount_old='sshfs -o follow_symlinks,auto_cache,reconnect,ServerAliveInterval=1,no_readahead tiborg@tiborgs.email-dev.ko1.os.scif.cz:/home/tiborg /mnt/tiborg -C; cd /mnt/tiborg_old/'
-    alias tiborg_mount='sshfs -o follow_symlinks,auto_cache,reconnect,ServerAliveInterval=1,no_readahead tiborg@tibor-buster.email-dev.ko1.os.scif.cz:/home/tiborg /mnt/tiborg -C; cd /mnt/tiborg/'
-    alias babuska_mount='sshfs -o allow_other,follow_symlinks,auto_cache,reconnect,ServerAliveInterval=1,no_readahead tiborg@babuska.dev:/home/tiborg /mnt/babuska -C; cd /mnt/babuska/'
-    alias rhovanionj_mount='sshfs -o allow_other,follow_symlinks,auto_cache,reconnect,ServerAliveInterval=1,no_readahead tiborg@email-jessie-builder.dev:/home/tiborg /mnt/rhovanionj -C; cd /mnt/rhovanionj/'
-    alias bdt_mount='sshfs -o allow_other,follow_symlinks,auto_cache,reconnect,ServerAliveInterval=1,no_readahead tiborg@rcptdb3.dev.dszn.cz:/home/tiborg /mnt/bdt -C; cd /mnt/bdt/'
-    # alias eml_mount='sshfs -o follow_symlinks,auto_cache,reconnect,ServerAliveInterval=1,no_readahead root@eml.dev.dszn.cz:/root/ /mnt/eml -C; cd /mnt/eml/'
-    alias eml_mount='sshfs -o allow_other,follow_symlinks,auto_cache,reconnect,ServerAliveInterval=1,no_readahead tiborg@eml.dev.dszn.cz:/home/tiborg /mnt/eml -C; cd /mnt/eml/'
+    alias anomon_mount='sshfs -o allow_other,follow_symlinks,auto_cache,reconnect,ServerAliveInterval=1,no_readahead tiborg@anomon.email-dev.ko1.os.scif.cz:/home/tiborg /tmp/mnt/anomon -C; cd /tmp/mnt/anomon/'
+    alias otiborg_mount='sshfs -o allow_other,follow_symlinks,auto_cache,reconnect,ServerAliveInterval=1,no_readahead tiborg@tiborgj.dev:/home/tiborg /tmp/mnt/otiborg -C; cd /tmp/mnt/otiborg/'
+    alias tiborgj_mount='sshfs -o allow_other,follow_symlinks,auto_cache,reconnect,ServerAliveInterval=1,no_readahead tiborg@tiborgj.email-dev.ko1.os.scif.cz:/home/tiborg /tmp/mnt/tiborgj -C; cd /tmp/mnt/tiborgj/'
+    alias tiborg_mount_old='sshfs -o follow_symlinks,auto_cache,reconnect,ServerAliveInterval=1,no_readahead tiborg@tiborgs.email-dev.ko1.os.scif.cz:/home/tiborg /tmp/mnt/tiborg -C; cd /tmp/mnt/tiborg_old/'
+    alias tiborg_mount='mkdir -p /tmp/mnt/tiborg; sshfs -o follow_symlinks,auto_cache,reconnect,ServerAliveInterval=1,no_readahead tiborg@tibor-bookworm.email-dev.ko1.os.scif.cz:/home/tiborg /tmp/mnt/tiborg -C; cd /tmp/mnt/tiborg/'
+    alias babuska_mount='sshfs -o allow_other,follow_symlinks,auto_cache,reconnect,ServerAliveInterval=1,no_readahead tiborg@babuska.dev:/home/tiborg /tmp/mnt/babuska -C; cd /tmp/mnt/babuska/'
+    alias rhovanionj_mount='sshfs -o allow_other,follow_symlinks,auto_cache,reconnect,ServerAliveInterval=1,no_readahead tiborg@email-jessie-builder.dev:/home/tiborg /tmp/mnt/rhovanionj -C; cd /tmp/mnt/rhovanionj/'
+    alias bdt_mount='sshfs -o allow_other,follow_symlinks,auto_cache,reconnect,ServerAliveInterval=1,no_readahead tiborg@rcptdb3.dev.dszn.cz:/home/tiborg /tmp/mnt/bdt -C; cd /tmp/mnt/bdt/'
+    # alias eml_mount='sshfs -o follow_symlinks,auto_cache,reconnect,ServerAliveInterval=1,no_readahead root@eml.dev.dszn.cz:/root/ /tmp/mnt/eml -C; cd /tmp/mnt/eml/'
+    alias eml_mount='sshfs -o allow_other,follow_symlinks,auto_cache,reconnect,ServerAliveInterval=1,no_readahead tiborg@eml.dev.dszn.cz:/home/tiborg /tmp/mnt/eml -C; cd /tmp/mnt/eml/'
 
 
     # if [[ "$(uname)" != "Darwin" ]]; then

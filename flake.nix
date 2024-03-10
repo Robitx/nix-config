@@ -18,11 +18,16 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    zsh-autocomplete = {
+      url = "github:marlonrichert/zsh-autocomplete/main";
+      flake = false;
+    };
+
   };
 
   outputs = {nixpkgs, impermanence, home-manager, ...} @ inputs:
   {
-    nixosConfigurations.default = nixpkgs.lib.nixosSystem {
+    nixosConfigurations.tibor480 = nixpkgs.lib.nixosSystem {
       specialArgs = {inherit inputs;};
       modules = [
         inputs.disko.nixosModules.default
@@ -41,7 +46,6 @@
         }
 
               
-        # inputs.home-manager.nixosModules.default
         inputs.impermanence.nixosModules.impermanence
       ];
     };
