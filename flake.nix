@@ -33,6 +33,7 @@
         inputs.disko.nixosModules.default
         (import ./disko.nix { device = "/dev/nvme0n1"; })
 
+        ./hardware-configuration/tibor480.nix
         ./configuration.nix
 
         home-manager.nixosModules.home-manager

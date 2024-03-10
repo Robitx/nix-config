@@ -7,14 +7,12 @@
 {
   imports =
     [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
     ];
 
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  networking.hostName = "tibor480"; # Define your hostname.
   networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
 
   time.timeZone = "Europe/Prague";

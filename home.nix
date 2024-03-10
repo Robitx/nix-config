@@ -125,6 +125,9 @@
     nodejs_18
     luajitPackages.luarocks
 
+    baobab
+    gparted
+
     gnumake
 
 
