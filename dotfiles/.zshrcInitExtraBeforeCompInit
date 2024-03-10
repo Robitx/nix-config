@@ -107,9 +107,8 @@ unsetopt rm_star_silent         # ask for confirmation for `rm *' or `rm path/*'
 # setxkbmap -option compose:ralt  # compose-key
 print -Pn "\e]0; %n@%M: %~\a"   # terminal titlevi mode setup
 
-tp=$(head -n 1 /persist/myconfs/tp)
-openai_api_key=$(head -n 1 /persist/myconfs/openai_api_key)
-googleai_api_key=$(head -n 1 /persist/myconfs/googleai_api_key)
-pplx_api_key=$(head -n 1 /persist/myconfs/pplx_api_key)
-pt="j1eKzixwAeCksQ1SKi-1"
-wc="/backup/rtcka/webadmins_certs/tibor.schmidt.crt,/backup/rtcka/webadmins_certs/tibor.schmidt.key"
+tp=$(head -n 1 /persist/secrets/tp)
+openai_api_key=$(head -n 1 /persist/secrets/openai_api_key)
+googleai_api_key=$(head -n 1 /persist/secrets/googleai_api_key)
+pplx_api_key=$(head -n 1 /persist/secrets/pplx_api_key)
+wc="/backup/secrets/webadmins_certs/tibor.schmidt.crt,/backup/secrets/webadmins_certs/tibor.schmidt.key"

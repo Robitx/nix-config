@@ -108,7 +108,7 @@
      rtkit.enable = true;
      pki.certificates = [
      ''
-     ${builtins.readFile /persist/myconfs/root2022.pem}
+     ${builtins.readFile /persist/secrets/root2022.pem}
      ''
      ];
    };
