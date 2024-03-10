@@ -197,7 +197,6 @@
       "/var/log"
       "/var/lib/bluetooth"
       "/var/lib/nixos"
-      "/var/lib/plex"
       "/var/lib/systemd/coredump"
       "/etc/NetworkManager/system-connections"
       { directory = "/var/lib/colord"; user = "colord"; group = "colord"; mode = "u=rwx,g=rx,o="; }
@@ -219,6 +218,12 @@
     uid = 1000;
   };
 
+
+  services.plex = {
+    enable = true;
+    dataDir = "/plex/var";
+    openFirewall = true;
+  };
 
   programs.fuse.userAllowOther = true;
   programs.zsh.enable = true;

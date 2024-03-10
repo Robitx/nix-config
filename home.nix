@@ -1,4 +1,4 @@
-{ config, pkgs, inputs, ... }:
+{ config, lib, pkgs, secrets, osConfig, inputs, ... }:
 
 {
   home.stateVersion = "23.11"; # Please read the comment before changing.
@@ -87,6 +87,7 @@
 
     openvpn
     networkmanager
+    wdisplays
 
     networkmanagerapplet
     xfce.thunar
@@ -359,10 +360,27 @@
   #   enable = true;
   # };
 
-  wayland.windowManager.hyprland = {
+  wayland.windowManager.hyprland = let
+    hostname = osConfig.networking.hostName;
+    # Define your monitor setups for different hostnames
+    monitorSetup = {
+      "tiborzen" = ''
+        monitor=DP-1,2560x1440@74.96800,0x480,1
+        monitor=DP-3,1920x1200@59.95000,2560x0,1
+        monitor=DP-3,transform,1
+      '';
+      "tibor480" = ''
+        monitor=,highres,auto,1
+      '';
+      # Add more hostnames and their corresponding setups as needed
+    };
+  in
+  {
     enable = true;
     extraConfig = ''
       # hyprland extra config
+      ${monitorSetup.${hostname}}
+  
       ${builtins.readFile ./dotfiles/.config/hypr/hyprland.conf}
     '';
   };

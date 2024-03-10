@@ -7,3 +7,6 @@
 
 [includeIf "gitdir:/backup/szngit/"]
 	path = config.szn
+
+[safe]
+	directory = *

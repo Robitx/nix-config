@@ -46,7 +46,29 @@
 	  };
         }
 
-              
+        inputs.impermanence.nixosModules.impermanence
+      ];
+    };
+
+    nixosConfigurations.tiborzen = nixpkgs.lib.nixosSystem {
+      specialArgs = {inherit inputs;};
+      modules = [
+        inputs.disko.nixosModules.default
+        (import ./disko.nix { device = "/dev/nvme0n1"; })
+
+        ./hardware-configuration/tiborzen.nix
+        ./configuration.nix
+
+        home-manager.nixosModules.home-manager
+        {
+          home-manager = {
+	    useGlobalPkgs = true;
+            useUserPackages = true;
+	    extraSpecialArgs = { inherit inputs; };
+            users.tibor = import ./home.nix;
+	  };
+        }
+
         inputs.impermanence.nixosModules.impermanence
       ];
     };
