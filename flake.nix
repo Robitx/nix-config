@@ -1,6 +1,6 @@
 {
   description = "Nixos config flake";
-     
+
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
@@ -25,52 +25,52 @@
 
   };
 
-  outputs = {nixpkgs, impermanence, home-manager, ...} @ inputs:
-  {
-    nixosConfigurations.tibor480 = nixpkgs.lib.nixosSystem {
-      specialArgs = {inherit inputs;};
-      modules = [
-        inputs.disko.nixosModules.default
-        (import ./disko.nix { device = "/dev/nvme0n1"; })
+  outputs = { nixpkgs, impermanence, home-manager, ... } @ inputs:
+    {
+      nixosConfigurations.tibor480 = nixpkgs.lib.nixosSystem {
+        specialArgs = { inherit inputs; };
+        modules = [
+          inputs.disko.nixosModules.default
+          (import ./disko.nix { device = "/dev/nvme0n1"; })
 
-        ./hardware-configuration/tibor480.nix
-        ./configuration.nix
+          ./hardware-configuration/tibor480.nix
+          ./configuration.nix
 
-        home-manager.nixosModules.home-manager
-        {
-          home-manager = {
-	    useGlobalPkgs = true;
-            useUserPackages = true;
-	    extraSpecialArgs = { inherit inputs; };
-            users.tibor = import ./home.nix;
-	  };
-        }
+          home-manager.nixosModules.home-manager
+          {
+            home-manager = {
+              useGlobalPkgs = true;
+              useUserPackages = true;
+              extraSpecialArgs = { inherit inputs; };
+              users.tibor = import ./home.nix;
+            };
+          }
 
-        inputs.impermanence.nixosModules.impermanence
-      ];
+          inputs.impermanence.nixosModules.impermanence
+        ];
+      };
+
+      nixosConfigurations.tiborzen = nixpkgs.lib.nixosSystem {
+        specialArgs = { inherit inputs; };
+        modules = [
+          inputs.disko.nixosModules.default
+          (import ./disko.nix { device = "/dev/nvme0n1"; })
+
+          ./hardware-configuration/tiborzen.nix
+          ./configuration.nix
+
+          home-manager.nixosModules.home-manager
+          {
+            home-manager = {
+              useGlobalPkgs = true;
+              useUserPackages = true;
+              extraSpecialArgs = { inherit inputs; };
+              users.tibor = import ./home.nix;
+            };
+          }
+
+          inputs.impermanence.nixosModules.impermanence
+        ];
+      };
     };
-
-    nixosConfigurations.tiborzen = nixpkgs.lib.nixosSystem {
-      specialArgs = {inherit inputs;};
-      modules = [
-        inputs.disko.nixosModules.default
-        (import ./disko.nix { device = "/dev/nvme0n1"; })
-
-        ./hardware-configuration/tiborzen.nix
-        ./configuration.nix
-
-        home-manager.nixosModules.home-manager
-        {
-          home-manager = {
-	    useGlobalPkgs = true;
-            useUserPackages = true;
-	    extraSpecialArgs = { inherit inputs; };
-            users.tibor = import ./home.nix;
-	  };
-        }
-
-        inputs.impermanence.nixosModules.impermanence
-      ];
-    };
-  };
 }

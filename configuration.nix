@@ -6,14 +6,15 @@
 
 {
   imports =
-    [ # Include the results of the hardware scan.
+    [
+      # Include the results of the hardware scan.
     ];
 
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
+  networking.networkmanager.enable = true; # Easiest to use and most distros use this by default.
 
   time.timeZone = "Europe/Prague";
 
@@ -57,7 +58,7 @@
 
 
   environment.variables.EDITOR = "nvim";
-  
+
 
   # Configure keymap in X11
   # services.xserver.xkb.layout = "us";
@@ -65,9 +66,9 @@
 
   # Enable CUPS to print documents.
   services.printing = {
-      enable = true;
-      drivers = [ pkgs.brlaser ]; # Brother printer driver
-    };
+    enable = true;
+    drivers = [ pkgs.brlaser ]; # Brother printer driver
+  };
 
   # Enable sound.
   # sound.enable = true;
@@ -88,38 +89,38 @@
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
-   environment.systemPackages = with pkgs; [
-     # waybar
-     # (waybar.overrideAttrs (oldAttrs: {
-     #     mesonFlags = oldAttrs.mesonFlags ++ [ "-Dexperimental=true" ];
-     #   })
-     # )
+  environment.systemPackages = with pkgs; [
+    # waybar
+    # (waybar.overrideAttrs (oldAttrs: {
+    #     mesonFlags = oldAttrs.mesonFlags ++ [ "-Dexperimental=true" ];
+    #   })
+    # )
 
-     mako
-     libnotify
-     rofi-wayland
-     wl-clipboard
+    mako
+    libnotify
+    rofi-wayland
+    wl-clipboard
 
-   ];
+  ];
 
-   security = {
-     rtkit.enable = true;
-     pki.certificates = [
-     ''
-     ${builtins.readFile /persist/secrets/root2022.pem}
-     ''
-     ];
-   };
+  security = {
+    rtkit.enable = true;
+    pki.certificates = [
+      ''
+        ${builtins.readFile /persist/secrets/root2022.pem}
+      ''
+    ];
+  };
 
-   sound.enable = true;
-   services.pipewire = {
-     enable = true;
-     alsa.enable = true;
-     alsa.support32Bit = true;
-     pulse.enable = true;
-     jack.enable = true;
-   
-   };
+  sound.enable = true;
+  services.pipewire = {
+    enable = true;
+    alsa.enable = true;
+    alsa.support32Bit = true;
+    pulse.enable = true;
+    jack.enable = true;
+
+  };
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
@@ -229,9 +230,18 @@
   programs.zsh.enable = true;
 
 
+  programs.xfconf.enable = true;
+  programs.thunar = {
+    enable = true;
+    plugins = with pkgs.xfce; [
+      thunar-volman
+      thunar-archive-plugin
+      thunar-media-tags-plugin
+    ];
+  };
 
-
- 
+  services.gvfs.enable = true; # Mount, trash, and other functionalities
+  services.tumbler.enable = true; # Thumbnail support for images
 
 }
 

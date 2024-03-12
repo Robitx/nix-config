@@ -93,12 +93,6 @@
     hyprpaper
     networkmanagerapplet
 
-    gvfs
-    xfce.thunar
-    xfce.thunar-volman
-    xfce.thunar-archive-plugin
-    xfce.thunar-media-tags-plugin
-
 
     nurl
     # wl-clipboard
@@ -112,9 +106,11 @@
     go
     gopls
     golint
+    golines
 
     git
     tig
+    commitlint
 
     jq
 
@@ -130,6 +126,10 @@
     fd
     nodejs_18
     luajitPackages.luarocks
+    luajitPackages.luacheck
+    prettierd
+    nixpkgs-fmt
+    nil
 
     baobab
     gparted
@@ -158,11 +158,17 @@
     tree-sitter
     fzf
     vimPlugins.telescope-fzf-native-nvim
+    revive
+    vale
+    eslint_d
+    stylua
+
+
 
     wget
     curl
     sshfs
-    
+
     kitty
 
     vivaldi
@@ -194,23 +200,26 @@
       pysocks
       urllib3
       pip
+      aiohttp
+      beautifulsoup4
+      ipython
+      jupyter
+      matplotlib
+      networkx
+      numpy
+      pandas
       black
-      aiohttp # async HTTP
-      beautifulsoup4 # web scraping
-      ipython # interactive shell
-      jupyter # interactive notebooks
-      matplotlib # plots
-      networkx # graphs
-      numpy # numerical computation
-      pandas # data analysis
-      pylint # static checking
+      flake8
+      pylint
+      isort
+      beautysh
       pwntools
-      setuptools # setup.py
+      setuptools
       scipy
       scikit-learn
-      z3 # Z3 theorem prover
+      z3
       scapy
-      opencv4 # opencv
+      opencv4
     ]))
   ];
 
@@ -279,7 +288,7 @@
       if [ -z "$TMUX" ] && [ "$XDG_SESSION_TYPE" != "tty" ]
       then
         tmux attach -t TMUX || tmux new -s TMUX;
-	return;
+        return;
       fi
     '';
 
@@ -302,7 +311,7 @@
     history = {
       expireDuplicatesFirst = true;
       extended = true;
-      ignoreAllDups = true; 
+      ignoreAllDups = true;
       ignoreDups = true;
       # ignorePatterns
       ignoreSpace = true;
@@ -315,7 +324,7 @@
 
 
     # ${builtins.readFile ./zshrc}
-    initExtra= ''
+    initExtra = ''
       # HERE init extra
       ${builtins.readFile ./dotfiles/.zshrcInitExtra}
     '';
@@ -357,7 +366,7 @@
 
   # xdg.configFile.nvim.source = /persist/nvim;
   # xdg.configFile.nvim.recursive = true;
-  home.file.".config/nvim".source = config.lib.file.mkOutOfStoreSymlink  /persist/nvim;
+  home.file.".config/nvim".source = config.lib.file.mkOutOfStoreSymlink /persist/nvim;
   home.file.".config/nvim".recursive = true;
 
   home.file.".config/kitty/kitty.conf".source = ./dotfiles/.config/kitty/kitty.conf;
@@ -365,30 +374,31 @@
   #   enable = true;
   # };
 
-  wayland.windowManager.hyprland = let
-    hostname = osConfig.networking.hostName;
-    # Define your monitor setups for different hostnames
-    monitorSetup = {
-      "tiborzen" = ''
-        monitor=DP-1,2560x1440@74.96800,0x0,1
-        monitor=DP-3,1920x1200@59.95000,2560x0,1
-        monitor=DP-3,transform,1
-      '';
-      "tibor480" = ''
-        monitor=,highres,auto,1
-      '';
-      # Add more hostnames and their corresponding setups as needed
-    };
-  in
-  {
-    enable = true;
-    extraConfig = ''
-      # hyprland extra config
-      ${monitorSetup.${hostname}}
+  wayland.windowManager.hyprland =
+    let
+      hostname = osConfig.networking.hostName;
+      # Define your monitor setups for different hostnames
+      monitorSetup = {
+        "tiborzen" = ''
+          monitor=DP-1,2560x1440@74.96800,0x0,1
+          monitor=DP-3,1920x1200@59.95000,2560x0,1
+          monitor=DP-3,transform,1
+        '';
+        "tibor480" = ''
+          monitor=,highres,auto,1
+        '';
+        # Add more hostnames and their corresponding setups as needed
+      };
+    in
+    {
+      enable = true;
+      extraConfig = ''
+        # hyprland extra config
+        ${monitorSetup.${hostname}}
   
-      ${builtins.readFile ./dotfiles/.config/hypr/hyprland.conf}
-    '';
-  };
+        ${builtins.readFile ./dotfiles/.config/hypr/hyprland.conf}
+      '';
+    };
 
   # services.kanshi = {
   #   enable = true;
@@ -397,14 +407,14 @@
   # };
 
   services.wlsunset = {
-      enable = true;
-      latitude = "50.0755";
-      longitude = "14.4378";
-      gamma = "0.8";
-      temperature = {
-          day = 4800;
-          night = 3600;
-      };
+    enable = true;
+    latitude = "50.0755";
+    longitude = "14.4378";
+    gamma = "0.8";
+    temperature = {
+      day = 4800;
+      night = 3600;
+    };
   };
 
   services.ssh-agent.enable = true;
