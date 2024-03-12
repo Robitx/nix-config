@@ -89,10 +89,15 @@
     networkmanager
     wdisplays
 
-    networkmanagerapplet
-    xfce.thunar
     waybar
     hyprpaper
+    networkmanagerapplet
+
+    gvfs
+    xfce.thunar
+    xfce.thunar-volman
+    xfce.thunar-archive-plugin
+    xfce.thunar-media-tags-plugin
 
 
     nurl
@@ -365,7 +370,7 @@
     # Define your monitor setups for different hostnames
     monitorSetup = {
       "tiborzen" = ''
-        monitor=DP-1,2560x1440@74.96800,0x480,1
+        monitor=DP-1,2560x1440@74.96800,0x0,1
         monitor=DP-3,1920x1200@59.95000,2560x0,1
         monitor=DP-3,transform,1
       '';
@@ -390,6 +395,17 @@
   #   extraConfig = ''
   #   '';
   # };
+
+  services.wlsunset = {
+      enable = true;
+      latitude = "50.0755";
+      longitude = "14.4378";
+      gamma = "0.8";
+      temperature = {
+          day = 4800;
+          night = 3600;
+      };
+  };
 
   services.ssh-agent.enable = true;
   home.file.".ssh/config".source = ./dotfiles/.ssh/config;

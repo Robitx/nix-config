@@ -111,4 +111,4 @@ tp=$(head -n 1 /persist/secrets/tp)
 openai_api_key=$(head -n 1 /persist/secrets/openai_api_key)
 googleai_api_key=$(head -n 1 /persist/secrets/googleai_api_key)
 pplx_api_key=$(head -n 1 /persist/secrets/pplx_api_key)
-wc="/backup/secrets/webadmins_certs/tibor.schmidt.crt,/backup/secrets/webadmins_certs/tibor.schmidt.key"
+wc="/persist/secrets/webadmins_certs/tibor.schmidt.crt,/persist/secrets/webadmins_certs/tibor.schmidt.key"
