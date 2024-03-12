@@ -35,6 +35,7 @@
       ".config/dconf" # gnome
       ".config/hypr"
       ".config/waybar"
+      ".config/github-copilot"
       ".tmux/plugins"
       ".local/share/nvim"
       ".local/state/nvim"
