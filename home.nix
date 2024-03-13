@@ -129,9 +129,24 @@
     nodejs_18
     luajitPackages.luarocks
     luajitPackages.luacheck
+    lua-language-server
+    efm-langserver
+    nodePackages.bash-language-server
+    nodePackages.typescript-language-server
+    nodePackages.pyright
+    yaml-language-server
+    vscode-langservers-extracted
     prettierd
     nixpkgs-fmt
     nil
+    shellcheck
+    dotenv-linter
+    revive
+    vale
+    eslint_d
+    delve
+    stylua
+    clang-tools
 
     baobab
     gparted
@@ -160,12 +175,6 @@
     tree-sitter
     fzf
     vimPlugins.telescope-fzf-native-nvim
-    revive
-    vale
-    eslint_d
-    stylua
-
-
 
     wget
     curl
