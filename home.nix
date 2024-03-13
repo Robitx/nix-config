@@ -39,6 +39,7 @@
       ".tmux/plugins"
       ".local/share/nvim"
       ".local/state/nvim"
+      ".mozilla"
       {
         directory = ".local/share/Steam";
         method = "symlink";
@@ -174,6 +175,7 @@
 
     vivaldi
     google-chrome
+    firefox
 
 
     thunderbird
