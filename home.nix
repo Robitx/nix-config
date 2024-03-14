@@ -105,6 +105,8 @@
 
     vscode
 
+    qbittorrent
+
     go
     gopls
     golint
