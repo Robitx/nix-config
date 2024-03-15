@@ -100,6 +100,7 @@
     libnotify
     rofi-wayland
     wl-clipboard
+    docker-compose
 
   ];
 
@@ -134,6 +135,8 @@
 
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
+
+  virtualisation.docker.enable = true;
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];

@@ -219,6 +219,8 @@
       ipython
       jupyter
       matplotlib
+      minio
+      flask
       networkx
       numpy
       pandas
