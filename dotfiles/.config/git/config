@@ -1,12 +1,19 @@
 [user]
 	name = Tibor Schmidt
 	email = robitx@gmail.com
+
 [push]
 	default = simple
 	autoSetupRemote = true
 
-[includeIf "gitdir:/backup/szngit/"]
-	path = config.szn
-
 [safe]
 	directory = *
+
+[pull]
+	rebase = true
+
+[alias]
+	nah = !git reset --hard && git clean -df
+
+[includeIf "gitdir:/backup/szngit/"]
+	path = config.szn
