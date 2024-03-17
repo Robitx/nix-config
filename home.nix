@@ -94,6 +94,11 @@
     waybar
     hyprpaper
     networkmanagerapplet
+    cliphist
+    pamixer
+    playerctl
+    pavucontrol
+    brightnessctl
 
 
     nurl
@@ -186,7 +191,7 @@
 
     vivaldi
     google-chrome
-    firefox
+    # firefox
 
 
     thunderbird
@@ -275,7 +280,7 @@
 
   programs.fzf = {
     enable = true;
-    enableZshIntegration = true;
+    # enableZshIntegration = true;
   };
 
   programs.direnv = {

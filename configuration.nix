@@ -123,6 +123,17 @@
 
   };
 
+  hardware.bluetooth = {
+    enable = true;
+    powerOnBoot = true;
+    settings = {
+        General = {
+            Experimental = true;
+        };
+    };
+  };
+  services.blueman.enable = true;
+
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;

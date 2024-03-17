@@ -1,13 +1,16 @@
 {
   "layer": "top",
   "spacing": 4,
-  "modules-center": [],
+  "modules-center": [
+    "hyprland/window"
+  ],
   "modules-left": [
     "hyprland/workspaces"
   ],
   "modules-right": [
     "temperature",
     "cpu",
+    "memory",
     "keyboard-state",
     "pulseaudio",
     "backlight",
@@ -79,6 +82,7 @@
     ]
   },
   "backlight": {
+    "device": "intel_backlight",
     "format": "{percent}% {icon}",
     "format-icons": [
       "",
@@ -109,6 +113,13 @@
       "",
       ""
     ]
+  },
+  "hyprland/window": {
+    "format": "👉 {}",
+    "rewrite": {
+        "(.*) — Mozilla Firefox": "🌎 $1",
+    },
+    "separate-outputs": true
   },
   "tray": {
     "spacing": 10

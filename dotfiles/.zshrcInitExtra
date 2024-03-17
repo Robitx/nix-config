@@ -42,8 +42,8 @@ if [[ "$RUNNING_IN_DOCKER" != "true" ]]; then
     xrandr --output HDMI1 --mode 1920x1080 --right-of DP1'
     alias xrandrhome='xrandr --output DP-4 --mode 2560x1440 --primary;
     xrandr --output DP-2 --mode 1920x1200 --right-of DP-4 --rotate left'
-    alias brightness='xbacklight -set'
-    alias monitoroff='sleep 1 && xset dpms force off'
+    # alias brightness='xbacklight -set'
+    # alias monitoroff='sleep 1 && xset dpms force off'
 
     alias yaourtupgrade='yaourt -Syu --aur'
 
