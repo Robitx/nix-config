@@ -121,6 +121,8 @@
     tig
     commitlint
 
+    ollama
+
     jq
 
     tree
