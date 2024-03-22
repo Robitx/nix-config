@@ -163,6 +163,7 @@
     gnumake
 
     graphviz
+    devpod
 
     ccal
 
