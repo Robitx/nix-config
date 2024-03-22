@@ -162,6 +162,7 @@
 
     gnumake
 
+    graphviz
 
     ccal
 
@@ -282,7 +283,7 @@
 
   programs.fzf = {
     enable = true;
-    # enableZshIntegration = true;
+    enableZshIntegration = true;
   };
 
   programs.direnv = {
@@ -295,7 +296,7 @@
     enableCompletion = false;
     enableAutosuggestions = false;
     plugins = [
-      { name = "zsh-autocomplete"; src = inputs.zsh-autocomplete; }
+      # { name = "zsh-autocomplete"; src = inputs.zsh-autocomplete; }
     ];
     syntaxHighlighting = {
       enable = true;
