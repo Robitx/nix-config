@@ -87,6 +87,7 @@
     # (pkgs.writeShellScriptBin "my-hello" ''
     #   echo "Hello, ${config.home.username}!" '')
 
+    openssl
     openvpn
     networkmanager
     wdisplays

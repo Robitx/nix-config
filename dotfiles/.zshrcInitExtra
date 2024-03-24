@@ -127,6 +127,7 @@ export PYSPARK_PYTHON=python2.7
 export OPENAI_API_KEY=$openai_api_key
 export GOOGLEAI_API_KEY=$googleai_api_key
 export PPLX_API_KEY=$pplx_api_key
+export ANTHROPIC_API_KEY=$anthropic_api_key
 export TERM=screen-256color
 
 if [ -n "$DESKTOP_SESSION" ];then
