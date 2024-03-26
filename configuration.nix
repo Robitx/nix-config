@@ -31,12 +31,12 @@
   # };
 
   # Enable the X11 windowing system.
-  # services.xserver.enable = true;
+  services.xserver.enable = true;
 
 
   # Enable the GNOME Desktop Environment.
-  # services.xserver.displayManager.gdm.enable = true;
-  # services.xserver.desktopManager.gnome.enable = true;
+  services.xserver.displayManager.gdm.enable = true;
+  services.xserver.desktopManager.gnome.enable = true;
 
   hardware = {
     opengl.enable = true;
@@ -113,23 +113,23 @@
     ];
   };
 
-  sound.enable = true;
-  services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    pulse.enable = true;
-    jack.enable = true;
+  # sound.enable = true;
+  # services.pipewire = {
+  #   enable = true;
+  #   alsa.enable = true;
+  #   alsa.support32Bit = true;
+  #   pulse.enable = true;
+  #   jack.enable = true;
 
-  };
+  # };
 
   hardware.bluetooth = {
     enable = true;
     powerOnBoot = true;
     settings = {
-        General = {
-            Experimental = true;
-        };
+      General = {
+        Experimental = true;
+      };
     };
   };
   services.blueman.enable = true;
@@ -256,6 +256,11 @@
 
   services.gvfs.enable = true; # Mount, trash, and other functionalities
   services.tumbler.enable = true; # Thumbnail support for images
+
+  services.udev.extraRules = ''
+    ATTRS{idVendor}=="04e8", ENV{ID_MM_DEVICE_IGNORE}="1"
+     ATTRS{idVendor}=="04e8", ATTRS{product}=="Gadget Serial", ENV{ID_MM_DEVICE_IGNORE}="1", ENV{MTP_NO_PROBE}="1"
+  '';
 
 }
 

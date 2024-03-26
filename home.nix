@@ -109,6 +109,8 @@
     kubectx
     kubectl
 
+    heimdall-gui
+
     vscode
 
     qbittorrent
