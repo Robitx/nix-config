@@ -211,6 +211,7 @@
     # python311Full
     (python311.withPackages (p: with p; [
       python
+      openpyxl
       pytz
       websockets
       urwid
@@ -444,7 +445,7 @@
   };
 
   services.ssh-agent.enable = true;
-  home.file.".ssh/config".source = config.lib.file.mkOutOfStoreSymlink ./dotfiles/.ssh/config;
+  home.file.".ssh/config".source = config.lib.file.mkOutOfStoreSymlink /persist/nix-config/dotfiles/.ssh/config;
 
 
   home.file.".config/hypr/hyprpaper.conf".source = ./dotfiles/.config/hypr/hyprpaper.conf;

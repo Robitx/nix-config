@@ -9,9 +9,6 @@
 [safe]
 	directory = *
 
-[pull]
-	rebase = true
-
 [alias]
 	nah = !git reset --hard && git clean -df
 
