@@ -40,10 +40,7 @@
       ".local/share/nvim"
       ".local/state/nvim"
       ".mozilla"
-      {
-        directory = ".local/share/Steam";
-        method = "symlink";
-      }
+      ".local/share/Steam"
     ];
     files = [
       ".screenrc"
@@ -106,6 +103,8 @@
     # wl-clipboard
     tmux
 
+    swaks
+
     kubectx
     kubectl
 
@@ -121,8 +120,6 @@
     git
     tig
     commitlint
-
-    ollama
 
     jq
 
@@ -163,10 +160,14 @@
 
     gnumake
 
+    meld
+
     graphviz
     devpod
 
     ccal
+
+    typescript
 
     p7zip
     cabextract
@@ -179,6 +180,7 @@
     grim
     slurp
 
+    lshw
 
 
     nerdfonts
@@ -407,9 +409,9 @@
       # Define your monitor setups for different hostnames
       monitorSetup = {
         "tiborzen" = ''
-          monitor=DP-1,2560x1440@74.96800,0x0,1
-          monitor=DP-3,1920x1200@59.95000,2560x0,1
-          monitor=DP-3,transform,1
+          monitor=DP-3,2560x1440@74.96800,0x0,1
+          monitor=DP-2,1920x1200@59.95000,2560x0,1
+          monitor=DP-2,transform,1
         '';
         "tibor480" = ''
           monitor=,highres,auto,1

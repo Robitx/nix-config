@@ -5,7 +5,8 @@
 
 {
   imports =
-    [ (modulesPath + "/installer/scan/not-detected.nix")
+    [
+      (modulesPath + "/installer/scan/not-detected.nix")
     ];
 
   boot.initrd.availableKernelModules = [ "nvme" "xhci_pci" "ahci" "usb_storage" "usbhid" "sd_mod" ];
@@ -24,4 +25,53 @@
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+
+  services.xserver.videoDrivers = [ "nvidia" ];
+
+  boot.kernelParams = [ "nvidia.NVreg_PreserveVideoMemoryAllocations=1" ];
+  hardware.nvidia = {
+    powerManagement.enable = true;
+    # powerManagement.finegrained = false;
+    open = false;
+    nvidiaSettings = true;
+    modesetting.enable = true;
+
+    # prime = {
+    #   sync.enable = true;
+    #   offload.enable = false;
+    #   nvidiaBusId = "PCI:9:0:0";
+    # };
+
+    # Optionally, you may need to select the appropriate driver version for your specific GPU.
+    package = config.boot.kernelPackages.nvidiaPackages.stable;
+    # package = config.boot.kernelPackages.nvidiaPackages.latest;
+    #package = config.boot.kernelPackages.nvidiaPackages.beta;
+    #package = config.boot.kernelPackages.nvidiaPackages.production;
+    #package = config.boot.kernelPackages.nvidiaPackages.vulkan_beta;
+    #package = config.boot.kernelPackages.nvidiaPackages.legacy_470;
+    #package = config.boot.kernelPackages.nvidiaPackages.legacy_390;
+    #package = config.boot.kernelPackages.nvidiaPackages.legacy_350;
+  };
+
+  services.ollama = {
+    enable = true;
+    acceleration = "cuda";
+    # package = pkgs.unstable.ollama;
+    models = "/backup/ollama_models";
+  };
+
+  programs.steam = {
+    enable = true;
+    gamescopeSession.enable = true;
+  };
+
+  environment.systemPackages = with pkgs; [
+    mangohud
+    protonup
+  ];
+
+  programs.gamemode.enable = true;
+
+  environment.variables.WLR_NO_HARDWARE_CURSORS = "1";
+
 }

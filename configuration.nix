@@ -38,8 +38,10 @@
   # services.xserver.displayManager.gdm.enable = true;
   # services.xserver.desktopManager.gnome.enable = true;
 
-  hardware = {
-    opengl.enable = true;
+  hardware.opengl = {
+    enable = true;
+    driSupport = true;
+    driSupport32Bit = true;
   };
 
   programs.hyprland = {
@@ -54,7 +56,16 @@
 
   nixpkgs.config.allowUnfree = true;
 
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings = {
+    experimental-features = [ "nix-command" "flakes" ];
+    # max-substitution-jobs = 128;
+    # substituters = [
+    #   "https://nix-community.cachix.org"
+    # ];
+    # trusted-public-keys = [
+    #   "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+    # ];
+  };
 
 
   environment.variables.EDITOR = "nvim";
@@ -127,9 +138,9 @@
     enable = true;
     powerOnBoot = true;
     settings = {
-        General = {
-            Experimental = true;
-        };
+      General = {
+        Experimental = true;
+      };
     };
   };
   services.blueman.enable = true;

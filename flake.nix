@@ -3,6 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    # nixpkgs.url = "github:nixos/nixpkgs/nixos-23.11";
 
     disko = {
       url = "github:nix-community/disko";
@@ -23,6 +24,15 @@
       flake = false;
     };
 
+  };
+
+  nixConfig = {
+    extra-substituters = [
+      "https://colmena.cachix.org"
+    ];
+    extra-trusted-public-keys = [
+      "colmena.cachix.org-1:7BzpDnjjH8ki2CT3f6GdOk7QAzPOl+1t3LvTLXqYcSg="
+    ];
   };
 
   outputs = { nixpkgs, impermanence, home-manager, ... } @ inputs:
