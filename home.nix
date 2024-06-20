@@ -1,7 +1,7 @@
 { config, lib, pkgs, secrets, osConfig, inputs, ... }:
 
 {
-  home.stateVersion = "23.11"; # Please read the comment before changing.
+  home.stateVersion = "24.05"; # Please read the comment before changing.
 
   imports = [
     inputs.impermanence.nixosModules.home-manager.impermanence
@@ -138,9 +138,10 @@
     luajitPackages.luacheck
     lua-language-server
     efm-langserver
+    pyright
     nodePackages.bash-language-server
     nodePackages.typescript-language-server
-    nodePackages.pyright
+    # nodePackages.pyright
     yaml-language-server
     vscode-langservers-extracted
     prettierd
@@ -154,6 +155,8 @@
     delve
     stylua
     clang-tools
+    clang_18
+    libgcc
 
     baobab
     gparted
@@ -299,7 +302,9 @@
   programs.zsh = {
     enable = true;
     enableCompletion = false;
-    enableAutosuggestions = false;
+    autosuggestion = {
+      enable = false;
+    };
     plugins = [
       # { name = "zsh-autocomplete"; src = inputs.zsh-autocomplete; }
     ];
