@@ -123,6 +123,8 @@
 
     jq
 
+    prusa-slicer
+
     tree
     htop
     killall
@@ -201,7 +203,7 @@
 
     vivaldi
     google-chrome
-    # firefox
+    firefox
 
 
     thunderbird

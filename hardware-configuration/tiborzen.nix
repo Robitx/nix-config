@@ -28,9 +28,9 @@
 
   services.xserver.videoDrivers = [ "nvidia" ];
 
-  boot.kernelParams = [ "nvidia.NVreg_PreserveVideoMemoryAllocations=1" ];
+  boot.kernelParams = [ "nvidia.NVreg_PreserveVideoMemoryAllocations=1" "nvidia-drm.fbdev=1" ];
   hardware.nvidia = {
-    powerManagement.enable = true;
+    powerManagement.enable = false;
     # powerManagement.finegrained = false;
     open = false;
     nvidiaSettings = true;
@@ -43,10 +43,10 @@
     # };
 
     # Optionally, you may need to select the appropriate driver version for your specific GPU.
-    package = config.boot.kernelPackages.nvidiaPackages.stable;
+    # package = config.boot.kernelPackages.nvidiaPackages.stable;
     # package = config.boot.kernelPackages.nvidiaPackages.latest;
-    #package = config.boot.kernelPackages.nvidiaPackages.beta;
-    #package = config.boot.kernelPackages.nvidiaPackages.production;
+    package = config.boot.kernelPackages.nvidiaPackages.beta;
+    # package = config.boot.kernelPackages.nvidiaPackages.production;
     #package = config.boot.kernelPackages.nvidiaPackages.vulkan_beta;
     #package = config.boot.kernelPackages.nvidiaPackages.legacy_470;
     #package = config.boot.kernelPackages.nvidiaPackages.legacy_390;
@@ -71,6 +71,15 @@
 
   programs.gamemode.enable = true;
 
+  # programs.hyprland.nvidiaPatches = true;
+
   environment.variables.WLR_NO_HARDWARE_CURSORS = "1";
+
+  nix.settings = {
+    substituters = [ "https://cuda-maintainers.cachix.org" ];
+    trusted-public-keys = [
+      "cuda-maintainers.cachix.org-1:0dq3bujKpuEPMCX6U4WylrUDZ9JyUG0VpVZa7CNfq5E="
+    ];
+  };
 
 }
