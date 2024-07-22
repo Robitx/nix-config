@@ -1,5 +1,9 @@
 { config, lib, pkgs, secrets, osConfig, inputs, ... }:
 
+let
+  inherit (inputs.hyprland.packages.${pkgs.system}) hyprland xdg-desktop-portal-hyprland;
+in
+
 {
   home.stateVersion = "24.05"; # Please read the comment before changing.
 
@@ -51,6 +55,32 @@
     allowOther = true;
   };
 
+  home.pointerCursor = {
+    gtk.enable = true;
+    package = pkgs.bibata-cursors;
+    name = "Bibata-Modern-Classic";
+    size = 16;
+  };
+
+
+  gtk = {
+    enable = true;
+
+    theme = {
+      package = pkgs.flat-remix-gtk;
+      name = "Flat-Remix-GTK-Grey-Darkest";
+    };
+
+    iconTheme = {
+      package = pkgs.adwaita-icon-theme;
+      name = "Adwaita";
+    };
+
+    font = {
+      name = "Sans";
+      size = 11;
+    };
+  };
 
   services.syncthing.enable = true;
 
@@ -165,6 +195,8 @@
 
     gnumake
 
+    act
+
     meld
 
     graphviz
@@ -203,7 +235,6 @@
 
     vivaldi
     google-chrome
-    firefox
 
 
     thunderbird
@@ -212,7 +243,11 @@
 
     gimp
 
-    sox
+    # sox
+    (sox.override { enableLame = true; })
+
+
+    audacity
     vlc
 
     # python311Full
@@ -428,6 +463,7 @@
     in
     {
       enable = true;
+      package = hyprland;
       extraConfig = ''
         # hyprland extra config
         ${monitorSetup.${hostname}}

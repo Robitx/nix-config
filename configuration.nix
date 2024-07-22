@@ -4,6 +4,10 @@
 
 { config, lib, pkgs, inputs, ... }:
 
+let
+  inherit (inputs.hyprland.packages.${pkgs.system}) hyprland xdg-desktop-portal-hyprland;
+in
+
 {
   imports =
     [
@@ -13,6 +17,13 @@
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
+
+  systemd.extraConfig = ''
+    DefaultTimeoutStopSec=10s
+    DefaultTimeoutAbortSec=10s
+    RebootWatchdogSec=10s
+    ShutdownWatchdogSec=10s
+  '';
 
   networking.networkmanager.enable = true; # Easiest to use and most distros use this by default.
 
@@ -47,11 +58,14 @@
   programs.hyprland = {
     enable = true;
     xwayland.enable = true;
+    package = hyprland;
+    portalPackage = xdg-desktop-portal-hyprland;
   };
 
   xdg.portal = {
     enable = true;
-    extraPortals = [ pkgs.xdg-desktop-portal-hyprland ];
+    extraPortals = [ xdg-desktop-portal-hyprland ];
+    # extraPortals = [ pkgs.xdg-desktop-portal-hyprland ];
   };
 
   nixpkgs.config.allowUnfree = true;
@@ -124,7 +138,7 @@
     ];
   };
 
-  sound.enable = true;
+  # sound.enable = true;
   services.pipewire = {
     enable = true;
     alsa.enable = true;

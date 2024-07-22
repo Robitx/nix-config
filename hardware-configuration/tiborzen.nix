@@ -28,7 +28,11 @@
 
   services.xserver.videoDrivers = [ "nvidia" ];
 
-  boot.kernelParams = [ "nvidia.NVreg_PreserveVideoMemoryAllocations=1" "nvidia-drm.fbdev=1" ];
+  boot.kernelPackages = pkgs.linuxPackages_latest;
+  boot.kernelParams = [ "nvidia.NVreg_PreserveVideoMemoryAllocations=1" "nvidia-drm.modeset=1" "nvidia-drm.fbdev=1" ];
+  hardware.graphics.extraPackages = with pkgs; [
+    vulkan-validation-layers
+  ];
   hardware.nvidia = {
     powerManagement.enable = false;
     # powerManagement.finegrained = false;
@@ -53,6 +57,13 @@
     #package = config.boot.kernelPackages.nvidiaPackages.legacy_350;
   };
 
+  # Set environment variables related to NVIDIA graphics
+  environment.variables = {
+    GBM_BACKEND = "nvidia-drm";
+    LIBVA_DRIVER_NAME = "nvidia";
+    __GLX_VENDOR_LIBRARY_NAME = "nvidia";
+  };
+
   services.ollama = {
     enable = true;
     acceleration = "cuda";
@@ -72,8 +83,6 @@
   programs.gamemode.enable = true;
 
   # programs.hyprland.nvidiaPatches = true;
-
-  environment.variables.WLR_NO_HARDWARE_CURSORS = "1";
 
   nix.settings = {
     substituters = [ "https://cuda-maintainers.cachix.org" ];
