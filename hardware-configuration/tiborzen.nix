@@ -66,6 +66,7 @@
 
   services.ollama = {
     enable = true;
+    sandbox = false;
     acceleration = "cuda";
     models = "/backup/ollama_models";
   };
