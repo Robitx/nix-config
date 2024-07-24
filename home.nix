@@ -5,7 +5,7 @@ let
 in
 
 {
-  home.stateVersion = "24.05"; # Please read the comment before changing.
+  home.stateVersion = "24.11"; # Please read the comment before changing.
 
   imports = [
     inputs.impermanence.nixosModules.home-manager.impermanence
