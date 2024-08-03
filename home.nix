@@ -135,6 +135,8 @@ in
 
     swaks
 
+    inetutils
+
     kubectx
     kubectl
 
@@ -148,6 +150,7 @@ in
     golines
 
     git
+    gh
     tig
     commitlint
 
