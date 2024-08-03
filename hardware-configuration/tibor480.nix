@@ -28,7 +28,6 @@
     user = "ollama";
     group = "ollama";
     enable = true;
-    sandbox = false;
     models = "/backup/ollama_models";
   };
 
