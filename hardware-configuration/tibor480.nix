@@ -5,7 +5,8 @@
 
 {
   imports =
-    [ (modulesPath + "/installer/scan/not-detected.nix")
+    [
+      (modulesPath + "/installer/scan/not-detected.nix")
     ];
 
   boot.initrd.availableKernelModules = [ "xhci_pci" "nvme" "usb_storage" "sd_mod" ];
@@ -24,6 +25,8 @@
 
 
   services.ollama = {
+    user = "ollama";
+    group = "ollama";
     enable = true;
     sandbox = false;
     models = "/backup/ollama_models";

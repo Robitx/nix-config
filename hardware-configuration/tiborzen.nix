@@ -57,6 +57,9 @@
     #package = config.boot.kernelPackages.nvidiaPackages.legacy_350;
   };
 
+
+  hardware.nvidia-container-toolkit.enable = true;
+
   # Set environment variables related to NVIDIA graphics
   environment.variables = {
     GBM_BACKEND = "nvidia-drm";
@@ -65,8 +68,9 @@
   };
 
   services.ollama = {
+    user = "ollama";
+    group = "ollama";
     enable = true;
-    sandbox = false;
     acceleration = "cuda";
     models = "/backup/ollama_models";
   };

@@ -252,7 +252,7 @@ in
   users.users."tibor" = {
     isNormalUser = true;
     # initialPassword = "dummypassword";
-    extraGroups = [ "networkmanager" "wheel" "docker" "nix" ]; # Enable ‘sudo’ for the user.
+    extraGroups = [ "networkmanager" "wheel" "docker" "nix" "ollama" ]; # Enable ‘sudo’ for the user.
     hashedPasswordFile = "/persist/nix-config/passwords/tibor";
     shell = pkgs.zsh;
     uid = 1000;
