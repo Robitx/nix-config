@@ -45,6 +45,10 @@ in
       ".local/state/nvim"
       ".mozilla"
       ".local/share/Steam"
+      "quickemu"
+      ".config/libreoffice"
+      ".config/qBittorrent"
+      ".local/share/qBittorrent"
     ];
     files = [
       ".screenrc"
@@ -143,6 +147,7 @@ in
     vscode
 
     qbittorrent
+    quickemu
 
     go
     gopls
@@ -157,6 +162,11 @@ in
     jq
 
     prusa-slicer
+
+    hunspell # Required for spellcheck
+    hunspellDicts.en_US # American English spellcheck dictionary
+    languagetool # spelling, style. and grammer checker
+    libreoffice-fresh
 
     tree
     htop
