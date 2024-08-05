@@ -18,37 +18,39 @@ in
   home.persistence."/persist/home/tibor" = {
     removePrefixDirectory = false;
     directories = [
+      ".cache"
+      ".config/Signal"
+      ".config/dconf" # gnome
+      ".config/github-copilot"
+      ".config/google-chrome"
+      ".config/hypr"
+      ".config/libreoffice"
+      ".config/qBittorrent"
+      ".config/PrusaSlicer"
+      ".config/skypeforlinux"
+      ".config/syncthing"
+      ".config/waybar"
+      ".gnupg"
+      ".local/share/Steam"
+      ".local/share/direnv"
+      ".local/share/keyrings"
+      ".local/share/nvim"
+      ".local/share/qBittorrent"
+      ".local/state/nvim"
+      ".local/state/syncthing"
+      ".mozilla"
+      ".nixops"
+      ".ollama"
+      ".ssh"
+      ".thunderbird"
+      ".tmux/plugins"
+      "Documents"
       "Downloads"
       "Music"
       "Pictures"
-      "Documents"
       "Videos"
       "VirtualBox VMs"
-      ".gnupg"
-      ".ssh"
-      ".nixops"
-      ".local/share/keyrings"
-      ".local/share/direnv"
-      ".cache"
-      ".config/google-chrome"
-      ".config/Signal"
-      ".config/skypeforlinux"
-      ".thunderbird"
-      ".local/state/syncthing"
-      ".config/syncthing"
-      ".config/dconf" # gnome
-      ".config/hypr"
-      ".config/waybar"
-      ".config/github-copilot"
-      ".tmux/plugins"
-      ".local/share/nvim"
-      ".local/state/nvim"
-      ".mozilla"
-      ".local/share/Steam"
       "quickemu"
-      ".config/libreoffice"
-      ".config/qBittorrent"
-      ".local/share/qBittorrent"
     ];
     files = [
       ".screenrc"
@@ -161,6 +163,8 @@ in
 
     jq
 
+
+    openscad-unstable
     prusa-slicer
 
     hunspell # Required for spellcheck

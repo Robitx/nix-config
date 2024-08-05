@@ -92,7 +92,7 @@ in
           rev = "5039be657c4263f2539a149199cbc8d6780df1c3";
           hash = "sha256-oH8TTifPSim0b6FJNss6H7IOODjzsj9vBIndT0quvuo=";
         };
-        patches = [];
+        patches = [ ];
       });
     })
   ];
@@ -252,6 +252,7 @@ in
       "/etc/nixos"
       "/var/log"
       "/var/lib/bluetooth"
+      "/var/lib/docker"
       "/var/lib/nixos"
       "/var/lib/systemd/coredump"
       "/etc/NetworkManager/system-connections"
