@@ -199,6 +199,7 @@ in
     shellcheck
     dotenv-linter
     revive
+    golangci-lint
     vale
     eslint_d
     delve
