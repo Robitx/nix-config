@@ -163,6 +163,8 @@ in
 
     jq
 
+    asciinema
+
 
     openscad-unstable
     prusa-slicer
