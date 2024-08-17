@@ -153,7 +153,7 @@ in
 
     go
     gopls
-    golint
+    # golint
     golines
 
     git
