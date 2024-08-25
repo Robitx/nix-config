@@ -263,6 +263,8 @@ in
 
     gimp
 
+    obsidian
+
     # sox
     (sox.override { enableLame = true; })
 
