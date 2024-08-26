@@ -30,6 +30,7 @@ in
       ".config/skypeforlinux"
       ".config/syncthing"
       ".config/waybar"
+      ".config/obsidian"
       ".gnupg"
       ".local/share/Steam"
       ".local/share/direnv"
