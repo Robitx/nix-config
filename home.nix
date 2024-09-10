@@ -31,6 +31,7 @@ in
       ".config/syncthing"
       ".config/waybar"
       ".config/obsidian"
+      ".config/matterhorn"
       ".gnupg"
       ".local/share/Steam"
       ".local/share/direnv"
@@ -261,6 +262,7 @@ in
     thunderbird
     skypeforlinux
     signal-desktop
+    matterhorn
 
     gimp
 
