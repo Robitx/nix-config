@@ -481,6 +481,7 @@ in
       # Define your monitor setups for different hostnames
       monitorSetup = {
         "tiborzen" = ''
+          monitor=Unknown-1, disable
           monitor=DP-3,2560x1440@74.96800,0x0,1
           monitor=DP-2,1920x1200@59.95000,2560x0,1
           monitor=DP-2,transform,1
