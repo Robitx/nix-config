@@ -165,6 +165,11 @@ in
 
     jq
 
+    imagemagick
+    pandoc
+
+    trufflehog
+
     asciinema
 
 
