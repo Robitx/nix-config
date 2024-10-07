@@ -19,6 +19,7 @@ in
   boot.loader.efi.canTouchEfiVariables = true;
 
   systemd.extraConfig = ''
+    DefaultLimitNOFILE=2048
     DefaultTimeoutStopSec=10s
     DefaultTimeoutAbortSec=10s
     RebootWatchdogSec=10s
