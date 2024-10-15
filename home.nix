@@ -163,6 +163,7 @@ in
     tig
     commitlint
 
+    yq
     jq
 
     imagemagick

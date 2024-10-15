@@ -18,12 +18,26 @@ in
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
+  boot.kernel.sysctl = {
+    "fs.file-max" = 1048576;
+    "fs.inotify.max_queued_events" = 1048576;
+    "fs.inotify.max_user_instances" = 1048576;
+    "fs.inotify.max_user_watches" = 1048576;
+  };
+
   systemd.extraConfig = ''
-    DefaultLimitNOFILE=2048
+    DefaultLimitNOFILE=1048576
+    DefaultLimitMEMLOCK=infinity
     DefaultTimeoutStopSec=10s
     DefaultTimeoutAbortSec=10s
     RebootWatchdogSec=10s
     ShutdownWatchdogSec=10s
+  '';
+
+  systemd.user.extraConfig = ''
+    DefaultLimitNOFILE=1048576
+    DefaultLimitMEMLOCK=infinity
+    DefaultTimeoutStopSec=10s
   '';
 
   networking.networkmanager.enable = true; # Easiest to use and most distros use this by default.
