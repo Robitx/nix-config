@@ -522,6 +522,7 @@ in
   home.file.".config/git/config.szn".source = ./dotfiles/.config/git/config.szn;
 
   programs.neovim = {
+    package = inputs.nixpkgs-stable.legacyPackages.${pkgs.system}.neovim-unwrapped;
     enable = true;
     viAlias = true;
     vimAlias = true;
