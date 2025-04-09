@@ -58,9 +58,6 @@
 
 
   hardware.nvidia-container-toolkit.enable = true;
-  virtualisation.docker = {
-    enableNvidia = true;
-  };
 
   # Set environment variables related to NVIDIA graphics
   environment.variables = {

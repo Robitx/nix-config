@@ -96,6 +96,7 @@ in
     # ];
   };
 
+
   nixpkgs.overlays = [
     # Have the current version of tmux replaces until the next release.
     # Waiting on this to be in the upsteam: https://github.com/tmux/tmux/pull/3958
@@ -108,6 +109,17 @@ in
           hash = "sha256-oH8TTifPSim0b6FJNss6H7IOODjzsj9vBIndT0quvuo=";
         };
         patches = [ ];
+      });
+    })
+    (final: prev: {
+      cliphist = prev.cliphist.overrideAttrs (_old: {
+        src = final.fetchFromGitHub {
+          owner = "sentriz";
+          repo = "cliphist";
+          rev = "refs/tags/v0.6.1";
+          sha256 = "sha256-tImRbWjYCdIY8wVMibc5g5/qYZGwgT9pl4pWvY7BDlI=";
+        };
+        vendorHash = "sha256-gG8v3JFncadfCEUa7iR6Sw8nifFNTciDaeBszOlGntU=";
       });
     })
   ];
