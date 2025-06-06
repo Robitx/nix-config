@@ -10,17 +10,16 @@
       description = "Rust toolchain channel to use";
     };
 
-    components = lib.mkOption {
-      type = lib.types.listOf lib.types.str;
-      default = [ "rustc" "cargo" "rustfmt" "clippy" "rust-analyzer" ];
-      description = "Rust components to install";
+    enableLSP = lib.mkOption {
+      type = lib.types.bool;
+      default = true;
+      description = "Include rust-analyzer language server";
     };
 
-    targets = lib.mkOption {
-      type = lib.types.listOf lib.types.str;
-      default = [];
-      description = "Additional compilation targets";
-      example = [ "wasm32-unknown-unknown" "x86_64-pc-windows-gnu" ];
+    enableCargoTools = lib.mkOption {
+      type = lib.types.bool;
+      default = true;
+      description = "Include additional cargo tools (audit, outdated, etc.)";
     };
 
     extraPackages = lib.mkOption {
@@ -32,30 +31,50 @@
 
   config = lib.mkIf config.development.languages.rust.enable {
     environment.systemPackages = with pkgs; [
-      # Rust toolchain manager
-      rustup
+      # Core Rust toolchain
+      rustc
+      cargo
+      rustfmt
+      clippy
       
-      # Additional build dependencies that Rust projects often need
+      # Build dependencies that most Rust projects need
       openssl
       pkg-config
+      
+    ] ++ lib.optionals config.development.languages.rust.enableLSP [
+      # Language server
+      rust-analyzer
+      
+    ] ++ lib.optionals config.development.languages.rust.enableCargoTools [
+      # Additional cargo tools
+      cargo-audit
+      cargo-outdated
+      cargo-edit
+      cargo-watch
       
     ] ++ config.development.languages.rust.extraPackages;
 
     environment.variables = {
       # Rust environment
       RUST_SRC_PATH = "${pkgs.rust.packages.stable.rustPlatform.rustLibSrc}";
-      
-      # Cargo home (user-specific, but good to set system default)
+      RUST_BACKTRACE = lib.mkDefault "1";
       CARGO_HOME = "/home/tibor/.cargo";
     };
 
-    # Ensure Cargo directories exist for users
+    # Ensure Cargo directories exist
     systemd.tmpfiles.rules = [
       "d /home/tibor/.cargo 0755 tibor users -"
       "d /home/tibor/.cargo/bin 0755 tibor users -"
     ];
 
-    # Add cargo bin to PATH for all users
-    environment.pathsToLink = [ "/home/tibor/.cargo/bin" ];
+    # Useful Rust development aliases
+    environment.shellAliases = {
+      "cr" = "cargo run";
+      "ct" = "cargo test";
+      "cb" = "cargo build";
+      "cc" = "cargo check";
+      "cf" = "cargo fmt";
+      "ccl" = "cargo clippy";
+    };
   };
 }
