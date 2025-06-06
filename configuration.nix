@@ -7,75 +7,178 @@
       ./modules/system/base.nix
       ./modules/system/persistence.nix
       ./modules/overlays/default.nix
+
+      # Desktop modules
       ./modules/desktop/hyprland.nix
       ./modules/desktop/audio.nix
       ./modules/desktop/bluetooth.nix
       ./modules/desktop/monitors.nix
       ./modules/desktop/fonts.nix
+      ./modules/desktop/utilities.nix
+
+      # Development
       ./modules/development/default.nix
+
+      # Applications
+      ./modules/applications/default.nix
+
+      # Shell
+      ./modules/shell/default.nix
+
+      # System
       ./modules/users/tibor.nix
       ./modules/services/default.nix
-      # Include the results of the hardware scan.
     ];
 
-  # Enable desktop modules
-  desktop.hyprland.enable = true;
-  desktop.audio.enable = true;
-  desktop.bluetooth.enable = true;
-  desktop.fonts.enable = true;
-
-  # Optional: customize settings
-  desktop.audio.lowLatency = true; # For audio production
-  # desktop.bluetooth.powerOnBoot = false; # If you want manual control
-
-  # Development environment - just enable what you need
-  development.enable = true;
-
-  # Languages
-  development.languages = {
-    go.enable = true;
-    rust.enable = true;
-    python = {
+  # Desktop environment
+  desktop = {
+    hyprland.enable = true;
+    audio.enable = true;
+    audio.lowLatency = true; # For audio production
+    bluetooth.enable = true;
+    fonts.enable = true;
+    utilities = {
       enable = true;
-      enableDataScience = true;
-      enableWeb = true;
-    };
-    javascript = {
-      enable = true;
-      enableTypeScript = true;
-      nodeVersion = "nodejs_24";
-    };
-    lua = {
-      enable = true;
-      enableNeovimSupport = true;
-    };
-    c = {
-      enable = true;
-      compiler = "clang";
-      enableDebugTools = true;
+      screenshots = true;
+      clipboard = true;
+      brightness = true;
+      displays = true;
+      statusBar = true;
+      wallpaper = true;
+      networkApplet = true;
     };
   };
 
-  # Development tools
-  development.tools = {
-    vscode.enable = true;
-    git = {
-      enable = true;
-      enableGitHub = true;
-      enableAdvancedTools = true;
-    };
-    kubernetes = {
-      enable = true;
-      enableHelm = true;
-      enableLocalCluster = false;
-    };
-  };
-
-  # Container development
-  development.containers = {
+  # Development environment
+  development = {
     enable = true;
-    enableDocker = true;
-    enableDevContainers = true;
-    enableCI = true;
+    languages = {
+      go.enable = true;
+      rust.enable = true;
+      python = {
+        enable = true;
+        enableDataScience = true;
+        enableWeb = true;
+      };
+      javascript = {
+        enable = true;
+        enableTypeScript = true;
+        nodeVersion = "nodejs_24";
+      };
+      lua = {
+        enable = true;
+        enableNeovimSupport = true;
+      };
+      c = {
+        enable = true;
+        compiler = "clang";
+        enableDebugTools = true;
+      };
+    };
+    tools = {
+      vscode.enable = true;
+      git = {
+        enable = true;
+        enableGitHub = true;
+        enableAdvancedTools = true;
+      };
+      kubernetes = {
+        enable = true;
+        enableHelm = true;
+      };
+    };
+    containers = {
+      enable = true;
+      enableDocker = true;
+      enableDevContainers = true;
+      enableCI = true;
+    };
+  };
+
+  # Applications
+  applications = {
+    enable = true;
+    browsers = {
+      enable = true;
+      chrome = true;
+      vivaldi = true;
+      defaultBrowser = "chrome";
+    };
+    communication = {
+      enable = true;
+      thunderbird = true;
+      signal = true;
+    };
+    media = {
+      enable = true;
+      graphics.gimp = true;
+      audio = {
+        audacity = true;
+        enableLameSupport = true;
+      };
+      video.vlc = true;
+    };
+    productivity = {
+      enable = true;
+      office = {
+        libreoffice = true;
+        spellcheck = true;
+        languageTools = true;
+      };
+      notes.obsidian = true;
+      downloads.qbittorrent = true;
+      cad.prusaSlicer = true;
+      archives = true;
+    };
+    utilities = {
+      enable = true;
+      system = {
+        diskUsage = true;
+        partitioning = true;
+        fileComparison = true;
+        calendar = true;
+        systemInfo = true;
+      };
+      network = {
+        basic = true;
+        vpn = true;
+      };
+      packageManager = true;
+    };
+  };
+
+  # Shell configuration
+  shell = {
+    enable = true;
+    defaultShell = "zsh";
+
+    # Zsh configuration
+    zsh = {
+      enable = true;
+      enableSyntaxHighlighting = true;
+      enableAutosuggestions = false;
+      enableTmuxAutoStart = true;
+      nixosAliases = true;
+      customAliases = {
+        lah = "ls -lah";
+        ll = "ls -l";
+      };
+    };
+
+    # Tmux configuration
+    tmux = {
+      enable = true;
+      enableMouse = true;
+      enableVimMode = true;
+      prefix = "C-a";
+      statusPosition = "top";
+      enablePluginManager = true;
+    };
+
+    # Terminal emulator
+    terminal = {
+      enable = true;
+      emulator = "kitty";
+    };
   };
 }
