@@ -5,6 +5,9 @@
     ./modules
   ];
 
+  programs.zsh.enable = true;
+  users.defaultUserShell = pkgs.zsh;
+
   # Desktop environment
   desktop = {
     hyprland.enable = true;
@@ -119,47 +122,6 @@
         vpn = true;
       };
       packageManager = true;
-    };
-  };
-
-  # Shell configuration
-  shell = {
-    enable = true;
-    defaultShell = "zsh";
-
-    # Zsh configuration
-    zsh = {
-      enable = true;
-      enableSyntaxHighlighting = true;
-      enableAutosuggestions = false;
-      enableTmuxAutoStart = true;
-      nixosAliases = true;
-      customAliases = {
-        lah = "ls -lah";
-        ll = "ls -l";
-        update = "export NIXPKGS_ALLOW_BROKEN=1; sudo nixos-rebuild boot --impure --flake '/persist/nix-config#'$(hostname) --max-jobs 2 --cores 4";
-        update-test = "export NIXPKGS_ALLOW_BROKEN=1; sudo nixos-rebuild test --impure --flake '/persist/nix-config#'$(hostname) --max-jobs 2 --cores 4";
-        update-full = "sudo nix flake update; update";
-        update-safe = "sudo nix flake update nixpkgs home-manager; update";
-        history = "history 0";
-        history-stat = "history | awk '{print \\$2}' | sort | uniq -c | sort -n -r | head";
-      };
-    };
-
-    # Tmux configuration
-    tmux = {
-      enable = true;
-      enableMouse = true;
-      enableVimMode = true;
-      prefix = "C-a";
-      statusPosition = "top";
-      enablePluginManager = true;
-    };
-
-    # Terminal emulator
-    terminal = {
-      enable = true;
-      emulator = "kitty";
     };
   };
 

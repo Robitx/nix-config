@@ -1,10 +1,10 @@
 {
   imports = [
     ./system
+    ./overlays
     ./desktop
     ./development
     ./applications
-    ./shell
     ./services
     ./users
     ./hardware
