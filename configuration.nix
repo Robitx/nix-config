@@ -9,6 +9,7 @@
       ./modules/overlays/default.nix
       ./modules/desktop/hyprland.nix
       ./modules/desktop/monitors.nix
+      ./modules/desktop/fonts.nix
       ./modules/users/tibor.nix
       ./modules/services/default.nix
       # Include the results of the hardware scan.
