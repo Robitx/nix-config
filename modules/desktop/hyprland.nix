@@ -5,68 +5,77 @@ let
 in
 
 {
-  programs.hyprland = {
-    enable = true;
-    xwayland.enable = true;
-    package = hyprland;
-    portalPackage = xdg-desktop-portal-hyprland;
-  };
+  options.desktop.hyprland = {
+    enable = lib.mkEnableOption "Hyprland window manager";
 
-  xdg.portal = {
-    enable = true;
-    extraPortals = [ xdg-desktop-portal-hyprland ];
-  };
+    enableXWayland = lib.mkOption {
+      type = lib.types.bool;
+      default = true;
+      description = "Enable XWayland support";
+    };
 
-
-  hardware.graphics = {
-    enable = true;
-    enable32Bit = true;
-  };
-
-  environment.systemPackages = with pkgs; [
-    mako
-    libnotify
-    rofi-wayland
-    wl-clipboard
-  ];
-
-  security = {
-    rtkit.enable = true;
-  };
-
-  services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    pulse.enable = true;
-    jack.enable = true;
-
-  };
-
-
-  hardware.bluetooth = {
-    enable = true;
-    powerOnBoot = true;
-    settings = {
-      General = {
-        Experimental = true;
-      };
+    extraPackages = lib.mkOption {
+      type = lib.types.listOf lib.types.package;
+      default = [ ];
+      description = "Additional packages for Hyprland desktop environment";
     };
   };
-  services.blueman.enable = true;
 
-  programs.xfconf.enable = true;
-  programs.thunar = {
-    enable = true;
-    plugins = with pkgs.xfce; [
-      thunar-volman
-      thunar-archive-plugin
-      thunar-media-tags-plugin
-    ];
+  config = lib.mkIf config.desktop.hyprland.enable {
+    # Hyprland window manager
+    programs.hyprland = {
+      enable = true;
+      xwayland.enable = config.desktop.hyprland.enableXWayland;
+      package = hyprland;
+      portalPackage = xdg-desktop-portal-hyprland;
+    };
+
+    # XDG Desktop Portal
+    xdg.portal = {
+      enable = true;
+      extraPortals = [ xdg-desktop-portal-hyprland ];
+    };
+
+    # Hardware graphics acceleration
+    hardware.graphics = {
+      enable = true;
+      enable32Bit = true;
+    };
+
+    # Essential Wayland/Hyprland packages
+    environment.systemPackages = with pkgs; [
+      # Notifications and rofi
+      mako
+      libnotify
+      rofi-wayland
+
+      # Clipboard
+      wl-clipboard
+
+      # File manager
+      xfce.thunar
+      xfce.thunar-volman
+      xfce.thunar-archive-plugin
+      xfce.thunar-media-tags-plugin
+
+    ] ++ config.desktop.hyprland.extraPackages;
+
+    # Thunar file manager configuration
+    programs.xfconf.enable = true;
+    programs.thunar = {
+      enable = true;
+      plugins = with pkgs.xfce; [
+        thunar-volman
+        thunar-archive-plugin
+        thunar-media-tags-plugin
+      ];
+    };
+
+    # File system services for Thunar
+    services.gvfs.enable = true;
+    services.tumbler.enable = true;
+
+    # Allow users to mount filesystems
+    programs.fuse.userAllowOther = true;
   };
-
-  services.gvfs.enable = true;
-  services.tumbler.enable = true;
-
-  programs.fuse.userAllowOther = true;
 }
