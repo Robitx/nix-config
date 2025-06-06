@@ -544,33 +544,16 @@ in
   #   enable = true;
   # };
 
-  wayland.windowManager.hyprland =
-    let
-      hostname = osConfig.networking.hostName;
-      # Define your monitor setups for different hostnames
-      monitorSetup = {
-        "tiborzen" = ''
-          monitor=Unknown-1, disable
-          monitor=DP-3,3440x1440@59.98700,0x0,1
-          monitor=DP-2,1920x1200@59.95000,3440x0,1
-          monitor=DP-2,transform,1
-        '';
-        "tibor480" = ''
-          monitor=,highres,auto,1
-        '';
-        # Add more hostnames and their corresponding setups as needed
-      };
-    in
-    {
-      enable = true;
-      package = hyprland;
-      extraConfig = ''
-        # hyprland extra config
-        ${monitorSetup.${hostname}}
-  
-        ${builtins.readFile ./dotfiles/.config/hypr/hyprland.conf}
-      '';
-    };
+  wayland.windowManager.hyprland = {
+    enable = true;
+    package = hyprland;
+    extraConfig = ''
+      # hyprland extra config
+      ${osConfig.desktop.monitors.hyprlandConfig}
+
+      ${builtins.readFile ./dotfiles/.config/hypr/hyprland.conf}
+    '';
+  };
 
   # services.kanshi = {
   #   enable = true;

@@ -33,4 +33,9 @@
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+
+  # Monitor configuration for tibor480
+  desktop.monitors.hyprlandConfig = ''
+    monitor=,highres,auto,1
+  '';
 }

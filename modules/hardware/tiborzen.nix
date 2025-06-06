@@ -79,4 +79,12 @@
       "cuda-maintainers.cachix.org-1:0dq3bujKpuEPMCX6U4WylrUDZ9JyUG0VpVZa7CNfq5E="
     ];
   };
+
+  # Monitor configuration for tiborzen
+  desktop.monitors.hyprlandConfig = ''
+    monitor=Unknown-1, disable
+    monitor=DP-3,3440x1440@59.98700,0x0,1
+    monitor=DP-2,1920x1200@59.95000,3440x0,1
+    monitor=DP-2,transform,1
+  '';
 }
