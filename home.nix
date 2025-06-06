@@ -84,7 +84,7 @@ in
     };
   };
 
-  # Personal services
+  # Services
   services.syncthing.enable = true;
   services.ssh-agent.enable = true;
   services.wlsunset = {
@@ -114,6 +114,73 @@ in
     enableZshIntegration = true;
   };
 
+  # ZSH Configuration
+  programs.zsh = {
+    enable = true;
+    enableCompletion = false;
+    autosuggestion = {
+      enable = false;
+    };
+    syntaxHighlighting = {
+      enable = true;
+    };
+
+    shellAliases = {
+      lah = "ls -lah";
+      ll = "ls -l";
+      update = "export NIXPKGS_ALLOW_BROKEN=1; sudo nixos-rebuild boot --impure --flake '/persist/nix-config#'$(hostname) --max-jobs 2 --cores 4";
+      update-test = "export NIXPKGS_ALLOW_BROKEN=1; sudo nixos-rebuild test --impure --flake '/persist/nix-config#'$(hostname) --max-jobs 2 --cores 4";
+      update-full = "sudo nix flake update; update";
+      update-safe = "sudo nix flake update nixpkgs home-manager; update";
+      history = "history 0";
+      history-stat = "history | awk '{print \\$2}' | sort | uniq -c | sort -n -r | head";
+    };
+
+    # Your working init configuration
+    initContent = lib.mkMerge [
+      (lib.mkBefore ''
+        if [ -z "$TMUX" ] && [ "$XDG_SESSION_TYPE" != "tty" ]
+        then
+          tmux attach -t TMUX || tmux new -s TMUX;
+          return;
+        fi
+      '')
+
+      # Your custom init before comp init
+      (lib.mkOrder 550 ''
+        ${builtins.readFile ./dotfiles/.zshrcInitExtraBeforeCompInit}
+      '')
+
+      # Your custom init extra
+      ''
+        ${builtins.readFile ./dotfiles/.zshrcInitExtra}
+      ''
+    ];
+
+    completionInit = ''
+      # use cache and refresh in separate thread
+      autoload -Uz compinit; compinit -C
+      (autoload -Uz compinit; compinit &)
+    '';
+
+    # Your working history configuration
+    history = {
+      expireDuplicatesFirst = true;
+      extended = true;
+      ignoreAllDups = true;
+      ignoreDups = false;
+      ignoreSpace = true;
+      path = "/persist/sync/.zsh_history";
+      share = true;
+      size = 16777216;
+      save = 8388608;
+    };
+
+    localVariables = {
+      RANDOM_VARIABLE_TEST = "dummy";
+    };
+  };
+
   # Editor configuration
   programs.neovim = {
     package = inputs.nixpkgs-stable.legacyPackages.${pkgs.system}.neovim-unwrapped;
@@ -123,7 +190,7 @@ in
     vimdiffAlias = true;
   };
 
-  # Hyprland configuration (window manager specific)
+  # Hyprland configuration (with your working monitor setup)
   wayland.windowManager.hyprland = {
     enable = true;
     package = hyprland;
@@ -133,7 +200,7 @@ in
     '';
   };
 
-  # Dotfiles and configuration files
+  # Dotfiles and configuration files (as you had them)
   home.file.".tmux.conf".source = ./dotfiles/.tmux.conf;
   home.file.".tmux/plugins/tpm".source = pkgs.fetchFromGitHub {
     owner = "tmux-plugins";
