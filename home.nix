@@ -444,28 +444,35 @@ in
     };
     shellAliases = {
       lah = "ls -lah";
-      update = "sudo nixos-rebuild boot --impure --flake '/persist/nix-config#'$(hostname)";
-      update-fast = "sudo nixos-rebuild boot --impure --flake '/persist/nix-config#'$(hostname) --max-jobs 2 --cores 4";
-      update-full = "sudo nix flake update; export NIXPKGS_ALLOW_BROKEN=1; update --max-jobs 2 --cores 4";
-      update-safe = "sudo nix flake update nixpkgs home-manager; export NIXPKGS_ALLOW_BROKEN=1; update --max-jobs 2 --cores 4";
+
+      update = "export NIXPKGS_ALLOW_BROKEN=1; sudo nixos-rebuild boot --impure --flake '/persist/nix-config#'$(hostname) --max-jobs 2 --cores 4";
+      update-test = "export NIXPKGS_ALLOW_BROKEN=1; sudo nixos-rebuild test --impure --flake '/persist/nix-config#'$(hostname) --max-jobs 2 --cores 4";
+      update-full = "sudo nix flake update; update";
+      update-safe = "sudo nix flake update nixpkgs home-manager; update";
+
       history = "history 0";
       history-stat = "history | awk '{print \$2}' | sort | uniq -c | sort -n -r | head";
     };
 
-    initExtraFirst = ''
-      if [ -z "$TMUX" ] && [ "$XDG_SESSION_TYPE" != "tty" ]
-      then
-        tmux attach -t TMUX || tmux new -s TMUX;
-        return;
-      fi
-    '';
+    initContent = lib.mkMerge [
+      (lib.mkBefore ''
+        if [ -z "$TMUX" ] && [ "$XDG_SESSION_TYPE" != "tty" ]
+        then
+          tmux attach -t TMUX || tmux new -s TMUX;
+          return;
+        fi
+      '')
 
-    initExtraBeforeCompInit = ''
-      # HERE init extra before compinit
+      # Replace initExtraBeforeCompInit with lib.mkOrder 550
+      (lib.mkOrder 550 ''
+        ${builtins.readFile ./dotfiles/.zshrcInitExtraBeforeCompInit}
+      '')
 
-      ${builtins.readFile ./dotfiles/.zshrcInitExtraBeforeCompInit}
-
-    '';
+      # Replace initExtra with regular initContent (runs last by default)
+      ''
+        ${builtins.readFile ./dotfiles/.zshrcInitExtra}
+      ''
+    ];
 
     completionInit = ''
       # use cache and refresh in separate thread
@@ -489,14 +496,6 @@ in
       save = 8388608;
     };
 
-
-
-    # ${builtins.readFile ./zshrc}
-    initExtra = ''
-      # HERE init extra
-      ${builtins.readFile ./dotfiles/.zshrcInitExtra}
-    '';
-
     localVariables = {
       RANDOM_VARIABLE_TEST = "dummy";
     };
@@ -508,12 +507,13 @@ in
 
   home.file.".tmux.conf".source = ./dotfiles/.tmux.conf;
   # nurl https://github.com/tmux-plugins/tpm v3.1.0
-  home.file.".tmux/plugins/tpm".source = pkgs.fetchFromGitHub {
-    owner = "tmux-plugins";
-    repo = "tpm";
-    rev = "v3.1.0";
-    hash = "sha256-CeI9Wq6tHqV68woE11lIY4cLoNY8XWyXyMHTDmFKJKI=";
-  };
+  home.file.".tmux/plugins/tpm".source = pkgs.fetchFromGitHub
+    {
+      owner = "tmux-plugins";
+      repo = "tpm";
+      rev = "v3.1.0";
+      hash = "sha256-CeI9Wq6tHqV68woE11lIY4cLoNY8XWyXyMHTDmFKJKI=";
+    };
 
   # programs.git = {
   #   enable = true;
@@ -535,7 +535,8 @@ in
 
   # xdg.configFile.nvim.source = /persist/nvim;
   # xdg.configFile.nvim.recursive = true;
-  home.file.".config/nvim".source = config.lib.file.mkOutOfStoreSymlink /persist/nvim;
+  home.file.".config/nvim".source = config.lib.file.mkOutOfStoreSymlink
+    /persist/nvim;
   home.file.".config/nvim".recursive = true;
 
   home.file.".config/kitty/kitty.conf".source = ./dotfiles/.config/kitty/kitty.conf;
@@ -589,7 +590,8 @@ in
   };
 
   services.ssh-agent.enable = true;
-  home.file.".ssh/config".source = config.lib.file.mkOutOfStoreSymlink /persist/nix-config/dotfiles/.ssh/config;
+  home.file.".ssh/config".source = config.lib.file.mkOutOfStoreSymlink
+    /persist/nix-config/dotfiles/.ssh/config;
 
 
   home.file.".config/hypr/hyprpaper.conf".source = ./dotfiles/.config/hypr/hyprpaper.conf;
