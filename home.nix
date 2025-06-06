@@ -445,6 +445,9 @@ in
     shellAliases = {
       lah = "ls -lah";
       update = "sudo nixos-rebuild boot --impure --flake '/persist/nix-config#'$(hostname)";
+      update-fast = "sudo nixos-rebuild boot --impure --flake '/persist/nix-config#'$(hostname) --max-jobs 2 --cores 4";
+      update-full = "sudo nix flake update; export NIXPKGS_ALLOW_BROKEN=1; update --max-jobs 2 --cores 4";
+      update-safe = "sudo nix flake update nixpkgs home-manager; export NIXPKGS_ALLOW_BROKEN=1; update --max-jobs 2 --cores 4";
       history = "history 0";
       history-stat = "history | awk '{print \$2}' | sort | uniq -c | sort -n -r | head";
     };
