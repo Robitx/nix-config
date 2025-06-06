@@ -2,33 +2,7 @@
 
 {
   imports = [
-    ./modules/system/boot.nix
-    ./modules/system/base.nix
-    ./modules/system/persistence.nix
-    ./modules/overlays/default.nix
-
-    # Desktop modules
-    ./modules/desktop/hyprland.nix
-    ./modules/desktop/audio.nix
-    ./modules/desktop/bluetooth.nix
-    ./modules/desktop/monitors.nix
-    ./modules/desktop/fonts.nix
-    ./modules/desktop/utilities.nix
-
-    # Development
-    ./modules/development/default.nix
-
-    # Applications
-    ./modules/applications/default.nix
-
-    # Shell
-    ./modules/shell/default.nix
-
-    # Services
-    ./modules/services/default.nix
-
-    # System
-    ./modules/users/tibor.nix
+    ./modules
   ];
 
   # Desktop environment
