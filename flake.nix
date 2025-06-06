@@ -26,9 +26,9 @@
       flake = false;
     };
 
-    aquamarine.url = "github:hyprwm/aquamarine";
+    aquamarine.url = "github:hyprwm/aquamarine/v0.8.0";
     # hyprland.url = "github:hyprwm/Hyprland";
-    hyprland.url = "git+https://github.com/hyprwm/Hyprland?submodules=1";
+    hyprland.url = "github:hyprwm/Hyprland/v0.49.0?submodules=true";
     hyprland.inputs.aquamarine.follows = "aquamarine";
     # hyprland-plugins = {
     #   url = "github:hyprwm/hyprland-plugins";
@@ -41,10 +41,15 @@
     extra-substituters = [
       "https://colmena.cachix.org"
       "https://hyprland.cachix.org"
+      "https://cuda-maintainers.cachix.org" # You have this for tiborzen
+      "https://nix-community.cachix.org" # Add this one
+      "https://cache.nixos.org" # Ensure this is prioritized
     ];
     extra-trusted-public-keys = [
       "colmena.cachix.org-1:7BzpDnjjH8ki2CT3f6GdOk7QAzPOl+1t3LvTLXqYcSg="
       "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="
+      "cuda-maintainers.cachix.org-1:0dq3bujKpuEPMCX6U4WylrUDZ9JyUG0VpVZa7CNfq5E="
+      "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
     ];
   };
 

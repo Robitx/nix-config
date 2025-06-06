@@ -8,15 +8,16 @@
         "systems": "systems"
       },
       "locked": {
-        "lastModified": 1749155310,
-        "narHash": "sha256-t0HfHg/1+TbSra5s6nNM0o4tnb3uqWedShSpZXsUMYY=",
+        "lastModified": 1742162448,
+        "narHash": "sha256-ybpV2+yNExdHnMhhhmtxqgBCgI+nRr8gi/D+VVb9lQY=",
         "owner": "hyprwm",
         "repo": "aquamarine",
-        "rev": "94981cf75a9f11da0b6dd6a1abbd7c50a36ab2d3",
+        "rev": "1c8fa0bf04d706698311cf595e80bbd6d3697956",
         "type": "github"
       },
       "original": {
         "owner": "hyprwm",
+        "ref": "v0.8.0",
         "repo": "aquamarine",
         "type": "github"
       }
@@ -86,11 +87,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1749178927,
-        "narHash": "sha256-bXcEx1aZUNm5hMLVJeuofcOrZyOiapzvQ7K36HYK3YQ=",
+        "lastModified": 1749219118,
+        "narHash": "sha256-Fxy71Kmwy8qhJ0nc69sw7iVfwn14GSdpTgyHf5KtfAs=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "91287a0e9d42570754487b7e38c6697e15a9aab2",
+        "rev": "812b43b45d4807e072b261cd00f35c911c3cbef0",
         "type": "github"
       },
       "original": {
@@ -175,19 +176,18 @@
         "xdph": "xdph"
       },
       "locked": {
-        "lastModified": 1749193279,
-        "narHash": "sha256-dUjWZWJBdMWGUy4Ys1ZoSbvxs2uM1Ddij/HsX2n2Oxc=",
-        "ref": "refs/heads/main",
-        "rev": "c35c2fea409a845b1023151a2b642f4aa077dacc",
-        "revCount": 6166,
-        "submodules": true,
-        "type": "git",
-        "url": "https://github.com/hyprwm/Hyprland"
+        "lastModified": 1746735318,
+        "narHash": "sha256-iN0Ge4LaVT7rATqzIrAZFSdfYuIXbe4/HGcXle7qK1g=",
+        "owner": "hyprwm",
+        "repo": "Hyprland",
+        "rev": "9958d297641b5c84dcff93f9039d80a5ad37ab00",
+        "type": "github"
       },
       "original": {
-        "submodules": true,
-        "type": "git",
-        "url": "https://github.com/hyprwm/Hyprland"
+        "owner": "hyprwm",
+        "ref": "v0.49.0",
+        "repo": "Hyprland",
+        "type": "github"
       }
     },
     "hyprland-protocols": {
