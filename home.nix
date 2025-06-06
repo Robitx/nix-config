@@ -103,7 +103,7 @@ in
     EDITOR = "nvim";
   };
 
-  # Shell configuration (if not moved to system modules)
+  # Development tools (user-level)
   programs.fzf = {
     enable = true;
     enableZshIntegration = true;
@@ -112,64 +112,6 @@ in
   programs.direnv = {
     enable = true;
     enableZshIntegration = true;
-  };
-
-  # ZSH configuration (could be moved to shell modules)
-  programs.zsh = {
-    enable = true;
-    enableCompletion = false;
-    autosuggestion = {
-      enable = false;
-    };
-    syntaxHighlighting = {
-      enable = true;
-    };
-    shellAliases = {
-      lah = "ls -lah";
-      update = "export NIXPKGS_ALLOW_BROKEN=1; sudo nixos-rebuild boot --impure --flake '/persist/nix-config#'$(hostname) --max-jobs 2 --cores 4";
-      update-test = "export NIXPKGS_ALLOW_BROKEN=1; sudo nixos-rebuild test --impure --flake '/persist/nix-config#'$(hostname) --max-jobs 2 --cores 4";
-      update-full = "sudo nix flake update; update";
-      update-safe = "sudo nix flake update nixpkgs home-manager; update";
-      history = "history 0";
-      history-stat = "history | awk '{print \\$2}' | sort | uniq -c | sort -n -r | head";
-    };
-
-    initContent = lib.mkMerge [
-      (lib.mkBefore ''
-        if [ -z "$TMUX" ] && [ "$XDG_SESSION_TYPE" != "tty" ]
-        then
-          tmux attach -t TMUX || tmux new -s TMUX;
-          return;
-        fi
-      '')
-      (lib.mkOrder 550 ''
-        ${builtins.readFile ./dotfiles/.zshrcInitExtraBeforeCompInit}
-      '')
-      ''
-        ${builtins.readFile ./dotfiles/.zshrcInitExtra}
-      ''
-    ];
-
-    completionInit = ''
-      autoload -Uz compinit; compinit -C
-      (autoload -Uz compinit; compinit &)
-    '';
-
-    history = {
-      expireDuplicatesFirst = true;
-      extended = true;
-      ignoreAllDups = true;
-      ignoreDups = false;
-      ignoreSpace = true;
-      path = "/persist/sync/.zsh_history";
-      share = true;
-      size = 16777216;
-      save = 8388608;
-    };
-
-    localVariables = {
-      RANDOM_VARIABLE_TEST = "dummy";
-    };
   };
 
   # Editor configuration

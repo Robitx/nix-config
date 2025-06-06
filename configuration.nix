@@ -1,34 +1,35 @@
 { config, lib, pkgs, inputs, ... }:
 
 {
-  imports =
-    [
-      ./modules/system/boot.nix
-      ./modules/system/base.nix
-      ./modules/system/persistence.nix
-      ./modules/overlays/default.nix
+  imports = [
+    ./modules/system/boot.nix
+    ./modules/system/base.nix
+    ./modules/system/persistence.nix
+    ./modules/overlays/default.nix
 
-      # Desktop modules
-      ./modules/desktop/hyprland.nix
-      ./modules/desktop/audio.nix
-      ./modules/desktop/bluetooth.nix
-      ./modules/desktop/monitors.nix
-      ./modules/desktop/fonts.nix
-      ./modules/desktop/utilities.nix
+    # Desktop modules
+    ./modules/desktop/hyprland.nix
+    ./modules/desktop/audio.nix
+    ./modules/desktop/bluetooth.nix
+    ./modules/desktop/monitors.nix
+    ./modules/desktop/fonts.nix
+    ./modules/desktop/utilities.nix
 
-      # Development
-      ./modules/development/default.nix
+    # Development
+    ./modules/development/default.nix
 
-      # Applications
-      ./modules/applications/default.nix
+    # Applications
+    ./modules/applications/default.nix
 
-      # Shell
-      ./modules/shell/default.nix
+    # Shell
+    ./modules/shell/default.nix
 
-      # System
-      ./modules/users/tibor.nix
-      ./modules/services/default.nix
-    ];
+    # Services
+    ./modules/services/default.nix
+
+    # System
+    ./modules/users/tibor.nix
+  ];
 
   # Desktop environment
   desktop = {
@@ -162,6 +163,12 @@
       customAliases = {
         lah = "ls -lah";
         ll = "ls -l";
+        update = "export NIXPKGS_ALLOW_BROKEN=1; sudo nixos-rebuild boot --impure --flake '/persist/nix-config#'$(hostname) --max-jobs 2 --cores 4";
+        update-test = "export NIXPKGS_ALLOW_BROKEN=1; sudo nixos-rebuild test --impure --flake '/persist/nix-config#'$(hostname) --max-jobs 2 --cores 4";
+        update-full = "sudo nix flake update; update";
+        update-safe = "sudo nix flake update nixpkgs home-manager; update";
+        history = "history 0";
+        history-stat = "history | awk '{print \\$2}' | sort | uniq -c | sort -n -r | head";
       };
     };
 
@@ -180,5 +187,11 @@
       enable = true;
       emulator = "kitty";
     };
+  };
+
+  # Services
+  services = {
+    enable = true;
+    system.optimizeSystemd = true;
   };
 }

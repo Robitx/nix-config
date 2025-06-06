@@ -65,14 +65,6 @@
 
   programs.gamemode.enable = true;
 
-  services.ollama = {
-    user = "ollama";
-    group = "ollama";
-    enable = true;
-    acceleration = "cuda";
-    models = "/backup/ollama_models";
-  };
-
   nix.settings = {
     substituters = [ "https://cuda-maintainers.cachix.org" ];
     trusted-public-keys = [
@@ -87,4 +79,21 @@
     monitor=DP-2,1920x1200@59.95000,3440x0,1
     monitor=DP-2,transform,1
   '';
+
+
+  # machine specific services
+  services.plex = {
+    enable = true;
+    dataDir = "/plex/var";
+    openFirewall = true;
+  };
+
+  services.ollama = {
+    user = "ollama";
+    group = "ollama";
+    enable = true;
+    acceleration = "cuda";
+    models = "/backup/ollama_models";
+  };
+
 }

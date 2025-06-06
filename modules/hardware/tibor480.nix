@@ -23,14 +23,6 @@
   # networking.interfaces.enp0s31f6.useDHCP = lib.mkDefault true;
   # networking.interfaces.wlp3s0.useDHCP = lib.mkDefault true;
 
-
-  services.ollama = {
-    user = "ollama";
-    group = "ollama";
-    enable = true;
-    models = "/backup/ollama_models";
-  };
-
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
 
@@ -38,4 +30,13 @@
   desktop.monitors.hyprlandConfig = ''
     monitor=,highres,auto,1
   '';
+
+  # machine specific services
+  services.ollama = {
+    enable = true;
+    user = "ollama";
+    group = "ollama";
+    models = "/backup/ollama_models";
+  };
+
 }

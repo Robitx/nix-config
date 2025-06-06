@@ -1,33 +1,33 @@
 { config, lib, pkgs, ... }:
 
 {
-  services.openssh.enable = true;
+  imports = [
+    ./system.nix
+    # Only include custom service modules here
+    # Built-in services (openssh, printing, plex, ollama) are configured directly
+  ];
 
-  services.printing = {
-    enable = true;
-    drivers = [ pkgs.brlaser ]; # Brother printer driver
+  options.services = {
+    enable = lib.mkEnableOption "system services";
   };
 
-  services.plex = {
-    enable = true;
-    dataDir = "/plex/var";
-    openFirewall = true;
+  config = lib.mkIf config.services.enable {
+    # Configure built-in NixOS services here
+    services.openssh.enable = true;
+
+    services.printing = {
+      enable = true;
+      drivers = [ pkgs.brlaser ]; # Brother printer driver
+    };
+
+    # Enable Avahi for network printer discovery
+    services.avahi = {
+      enable = true;
+      nssmdns4 = true;
+      openFirewall = true;
+    };
+
+    # Enable Docker
+    virtualisation.docker.enable = true;
   };
-
-  virtualisation.docker.enable = true;
-
-  systemd.extraConfig = ''
-    DefaultLimitNOFILE=1048576
-    DefaultLimitMEMLOCK=infinity
-    DefaultTimeoutStopSec=10s
-    DefaultTimeoutAbortSec=10s
-    RebootWatchdogSec=10s
-    ShutdownWatchdogSec=10s
-  '';
-
-  systemd.user.extraConfig = ''
-    DefaultLimitNOFILE=1048576
-    DefaultLimitMEMLOCK=infinity
-    DefaultTimeoutStopSec=10s
-  '';
 }

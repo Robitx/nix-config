@@ -11,8 +11,7 @@
       "wheel"
       "docker"
       "nix"
-      "ollama"
-    ];
+    ] ++ lib.optionals config.services.ollama.enable [ "ollama" ];
     hashedPasswordFile = "/persist/nix-config/passwords/tibor";
     shell = pkgs.zsh;
     uid = 1000;
