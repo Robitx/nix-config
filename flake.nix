@@ -41,8 +41,8 @@
     extra-substituters = [
       "https://colmena.cachix.org"
       "https://hyprland.cachix.org"
-      "https://cuda-maintainers.cachix.org" # You have this for tiborzen
-      "https://nix-community.cachix.org" # Add this one
+      "https://cuda-maintainers.cachix.org"
+      "https://nix-community.cachix.org"
       "https://cache.nixos.org" # Ensure this is prioritized
     ];
     extra-trusted-public-keys = [
@@ -61,7 +61,7 @@
           inputs.disko.nixosModules.default
           (import ./disko.nix { device = "/dev/nvme0n1"; })
 
-          ./hardware-configuration/tibor480.nix
+          ./modules/hardware/tibor480.nix
           ./configuration.nix
 
           home-manager.nixosModules.home-manager
@@ -84,7 +84,7 @@
           inputs.disko.nixosModules.default
           (import ./disko.nix { device = "/dev/nvme0n1"; })
 
-          ./hardware-configuration/tiborzen.nix
+          ./modules/hardware/tiborzen.nix
           ./configuration.nix
 
           home-manager.nixosModules.home-manager
