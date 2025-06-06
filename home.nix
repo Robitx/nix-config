@@ -5,7 +5,7 @@ let
 in
 
 {
-  home.stateVersion = "24.11"; # Please read the comment before changing.
+  home.stateVersion = "25.05"; # Please read the comment before changing.
 
   imports = [
     inputs.impermanence.nixosModules.home-manager.impermanence
@@ -157,6 +157,10 @@ in
     # golint
     golines
 
+    nh
+
+    rustup
+
     git
     gh
     tig
@@ -173,7 +177,7 @@ in
     asciinema
 
 
-    openscad-unstable
+    # openscad-unstable
     prusa-slicer
 
     hunspell # Required for spellcheck
@@ -473,7 +477,7 @@ in
       expireDuplicatesFirst = true;
       extended = true;
       ignoreAllDups = true;
-      ignoreDups = true;
+      ignoreDups = false;
       # ignorePatterns
       ignoreSpace = true;
       path = "/persist/sync/.zsh_history";
