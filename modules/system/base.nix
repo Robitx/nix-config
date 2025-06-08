@@ -19,6 +19,10 @@
   environment.systemPackages = with pkgs; [
 
     docker-compose
+    kitty
+    ghostty
+    neovim
+    tmux
 
   ];
 
