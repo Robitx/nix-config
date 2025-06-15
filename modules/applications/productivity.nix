@@ -20,6 +20,8 @@
     
     cad = {
       prusaSlicer = lib.mkEnableOption "PrusaSlicer for 3D printing";
+      superSlicer = lib.mkEnableOption "SuperSlicer for 3D printing";
+      openscad = lib.mkEnableOption "OpenSCAD for 3D modeling";
     };
     
     archives = lib.mkEnableOption "archive and compression tools";
@@ -39,6 +41,10 @@
       qbittorrent
     ] ++ lib.optionals config.applications.productivity.cad.prusaSlicer [
       prusa-slicer
+    ] ++ lib.optionals config.applications.productivity.cad.openscad [
+        openscad
+    ] ++ lib.optionals config.applications.productivity.cad.superSlicer [
+        super-slicer
     ] ++ lib.optionals config.applications.productivity.archives [
       p7zip
       cabextract

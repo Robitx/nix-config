@@ -27,6 +27,7 @@ in
       ".config/libreoffice"
       ".config/qBittorrent"
       ".config/PrusaSlicer"
+      ".config/SuperSlicer"
       ".config/syncthing"
       ".config/waybar"
       ".config/obsidian"

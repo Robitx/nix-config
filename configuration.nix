@@ -106,6 +106,8 @@
       notes.obsidian = true;
       downloads.qbittorrent = true;
       cad.prusaSlicer = true;
+      cad.superSlicer = true;
+      cad.openscad = true;
       archives = true;
     };
     utilities = {
