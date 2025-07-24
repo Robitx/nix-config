@@ -11,6 +11,7 @@
 
 [alias]
 	nah = !git reset --hard && git clean -df
+	wdiff = diff --color=always --word-diff
 
 [includeIf "gitdir:/backup/szngit/"]
 	path = config.szn
