@@ -5,8 +5,8 @@
     enable = lib.mkEnableOption "Python development environment";
 
     version = lib.mkOption {
-      type = lib.types.enum [ "python39" "python310" "python311" "python312" ];
-      default = "python311";
+      type = lib.types.enum [ "python39" "python310" "python311" "python312" "python313" ];
+      default = "python313";
       description = "Python version to use";
     };
 
@@ -102,7 +102,7 @@
         minio
         networkx
         z3
-        opencv4
+        # opencv4
         beautysh
         
       ] ++ (config.development.languages.python.extraPackages p)))

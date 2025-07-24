@@ -50,5 +50,6 @@
 
     # Enable NetworkManager if network utilities are requested
     networking.networkmanager.enable = lib.mkIf config.applications.utilities.network.basic true;
+    networking.networkmanager.plugins = with pkgs; [ networkmanager-openvpn ];
   };
 }

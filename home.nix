@@ -196,13 +196,16 @@ in
     enable = true;
     package = hyprland;
     extraConfig = ''
-      ${osConfig.desktop.monitors.hyprlandConfig}
       ${builtins.readFile ./dotfiles/.config/hypr/hyprland.conf}
     '';
+    # extraConfig = ''
+    #   ${osConfig.desktop.monitors.hyprlandConfig}
+    #   ${builtins.readFile ./dotfiles/.config/hypr/hyprland.conf}
+    # '';
   };
 
   # Dotfiles and configuration files (as you had them)
-  home.file.".tmux.conf".source = ./dotfiles/.tmux.conf;
+  home.file.".tmux.conf".source = config.lib.file.mkOutOfStoreSymlink /persist/nix-config/dotfiles/.tmux.conf;
   home.file.".tmux/plugins/tpm".source = pkgs.fetchFromGitHub {
     owner = "tmux-plugins";
     repo = "tpm";
@@ -210,15 +213,16 @@ in
     hash = "sha256-CeI9Wq6tHqV68woE11lIY4cLoNY8XWyXyMHTDmFKJKI=";
   };
 
-  home.file.".config/git/config".source = ./dotfiles/.config/git/config;
-  home.file.".config/git/config.szn".source = ./dotfiles/.config/git/config.szn;
+  home.file.".config/git/config".source = config.lib.file.mkOutOfStoreSymlink "/persist/nix-config/dotfiles/.config/git/config";
+  home.file.".config/git/config.szn".source = config.lib.file.mkOutOfStoreSymlink "/persist/nix-config/dotfiles/.config/git/config.szn";
   home.file.".config/nvim".source = config.lib.file.mkOutOfStoreSymlink /persist/nvim;
   home.file.".config/nvim".recursive = true;
-  home.file.".config/kitty/kitty.conf".source = ./dotfiles/.config/kitty/kitty.conf;
+  home.file.".config/kitty/kitty.conf".source = config.lib.file.mkOutOfStoreSymlink "/persist/nix-config/dotfiles/.config/kitty/kitty.conf";
   home.file.".ssh/config".source = config.lib.file.mkOutOfStoreSymlink /persist/nix-config/dotfiles/.ssh/config;
-  home.file.".config/hypr/hyprpaper.conf".source = ./dotfiles/.config/hypr/hyprpaper.conf;
-  home.file.".config/waybar/config".source = ./dotfiles/.config/waybar/config;
-  home.file.".config/waybar/style.css".source = ./dotfiles/.config/waybar/style.css;
+  home.file.".config/hypr/hyprpaper.conf".source = config.lib.file.mkOutOfStoreSymlink "/persist/nix-config/dotfiles/.config/hypr/hyprpaper.conf";
+  # home.file.".config/hypr/hyprland.conf".source = config.lib.file.mkOutOfStoreSymlink "/persist/nix-config/dotfiles/.config/hypr/hyprland.conf";
+  home.file.".config/waybar/config".source = config.lib.file.mkOutOfStoreSymlink "/persist/nix-config/dotfiles/.config/waybar/config";
+  home.file.".config/waybar/style.css".source = config.lib.file.mkOutOfStoreSymlink "/persist/nix-config/dotfiles/.config/waybar/style.css";
 
   # Let Home Manager install and manage itself
   programs.home-manager.enable = true;

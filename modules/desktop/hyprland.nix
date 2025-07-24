@@ -49,8 +49,11 @@ in
       libnotify
       rofi-wayland
 
+      wlsunset
+
       # Clipboard
       wl-clipboard
+      wl-clip-persist
 
       # File manager
       xfce.thunar

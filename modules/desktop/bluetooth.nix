@@ -66,6 +66,7 @@
     environment.systemPackages = with pkgs; [
       bluez
       bluez-tools
+      bluetuith
     ];
 
     # Enable D-Bus for Bluetooth communication

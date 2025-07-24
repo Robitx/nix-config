@@ -47,6 +47,8 @@
       pamixer
       pavucontrol
       playerctl
+      alsa-utils
+      alsa-tools
     ] ++ config.desktop.audio.extraPackages;
 
     # Ensure audio group exists and add users

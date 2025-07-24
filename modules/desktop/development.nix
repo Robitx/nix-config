@@ -70,7 +70,7 @@
 
     ++ lib.optionals config.desktop.development.languages.python [
       pyright
-      (python311.withPackages (p: with p; [
+      (python313.withPackages (p: with p; [
         python
         openpyxl
         pytz
@@ -107,7 +107,7 @@
         scikit-learn
         z3
         scapy
-        opencv4
+        # opencv4
       ]))
     ]
 
