@@ -6,5 +6,6 @@
         ./fonts.nix
         ./monitors.nix
         ./utilities.nix
+        ./sway.nix
     ];
 }

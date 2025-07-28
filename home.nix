@@ -24,6 +24,7 @@ in
       ".config/github-copilot"
       ".config/google-chrome"
       ".config/hypr"
+      ".config/sway"  # Added Sway config directory
       ".config/libreoffice"
       ".config/qBittorrent"
       ".config/PrusaSlicer"
@@ -191,18 +192,23 @@ in
     vimdiffAlias = true;
   };
 
-  # Hyprland configuration (with your working monitor setup)
-  wayland.windowManager.hyprland = {
+  # Hyprland configuration (only if enabled at system level)
+  wayland.windowManager.hyprland = lib.mkIf osConfig.desktop.hyprland.enable {
     enable = true;
     package = hyprland;
     extraConfig = ''
       ${builtins.readFile ./dotfiles/.config/hypr/hyprland.conf}
     '';
-    # extraConfig = ''
-    #   ${osConfig.desktop.monitors.hyprlandConfig}
-    #   ${builtins.readFile ./dotfiles/.config/hypr/hyprland.conf}
-    # '';
   };
+
+  # Sway configuration (only if enabled at system level)
+  # wayland.windowManager.sway = lib.mkIf osConfig.desktop.sway.enable {
+  #   enable = true;
+  #   config = null; # We'll use the config file instead
+  #   # extraConfig = ''
+  #   #   include ~/.config/sway/config
+  #   # '';
+  # };
 
   # Dotfiles and configuration files (as you had them)
   home.file.".tmux.conf".source = config.lib.file.mkOutOfStoreSymlink /persist/nix-config/dotfiles/.tmux.conf;
@@ -223,6 +229,11 @@ in
   # home.file.".config/hypr/hyprland.conf".source = config.lib.file.mkOutOfStoreSymlink "/persist/nix-config/dotfiles/.config/hypr/hyprland.conf";
   home.file.".config/waybar/config".source = config.lib.file.mkOutOfStoreSymlink "/persist/nix-config/dotfiles/.config/waybar/config";
   home.file.".config/waybar/style.css".source = config.lib.file.mkOutOfStoreSymlink "/persist/nix-config/dotfiles/.config/waybar/style.css";
+  
+  # Add Sway config file
+  home.file.".config/sway/config".source = config.lib.file.mkOutOfStoreSymlink "/persist/nix-config/dotfiles/.config/sway/config";
+  # home.file.".config/i3status/config".source = config.lib.file.mkOutOfStoreSymlink "/persist/nix-config/dotfiles/.config/i3status/config";
+  home.file.".config/swaylock/config".source = config.lib.file.mkOutOfStoreSymlink "/persist/nix-config/dotfiles/.config/swaylock/config";
 
   # Let Home Manager install and manage itself
   programs.home-manager.enable = true;

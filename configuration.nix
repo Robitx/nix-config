@@ -10,7 +10,8 @@
 
   # Desktop environment
   desktop = {
-    hyprland.enable = true;
+    hyprland.enable = false;
+    sway.enable = true;
     audio.enable = true;
     audio.lowLatency = true; # For audio production
     bluetooth.enable = true;
