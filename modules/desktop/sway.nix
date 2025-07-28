@@ -19,14 +19,19 @@
 
   config = lib.mkIf config.desktop.sway.enable {
 
-    # security.polkit.enable = true;
+    security.polkit.enable = true;
 
     services.gnome.gnome-keyring.enable = true;
 
     # Sway window manager
+    programs.xwayland.enable = true;
     programs.sway = {
       enable = true;
-      wrapperFeatures.gtk = true;
+      # wrapperFeatures.gtk = true;
+      # xwayland.enable = true;
+      extraOptions = [ "--unsupported-gpu" ];
+      extraSessionCommands = ''
+      '';
       extraPackages = with pkgs; [
         swaylock
         swayidle
@@ -38,11 +43,15 @@
       ];
     };
 
+    programs.waybar.enable = true;
+    services.dbus.enable = true;
+
     # XDG Desktop Portal for screen sharing, etc.
     xdg.portal = {
       enable = true;
+      xdgOpenUsePortal = true;
       wlr.enable = true;
-      extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+      # extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
     };
 
     # Hardware graphics acceleration
@@ -63,31 +72,40 @@
 
       # Wallpaper
       swaybg
-      
+
+      # xwayland # XWayland support
+
+      # # GTK settings
+      # glib # for gsettings
+      # pkgs.adwaita-icon-theme
+      # gtk-engine-murrine
+      # gtk_engines
+      # gsettings-desktop-schemas
+
       # Screenshots
       grim
       slurp
-      
+
       # Clipboard
       wl-clipboard
       wl-clip-persist
-      
+
       # Display configuration
       wdisplays
       kanshi # Auto display configuration
-      
+
       # Status bar (waybar works with both Hyprland and Sway)
       waybar
-      
+
       # Brightness control
       brightnessctl
-      
+
       # Color temperature
       wlsunset
-      
+
       # Audio control
       pavucontrol
-      
+
       # Network applet
       networkmanagerapplet
 
@@ -96,6 +114,10 @@
       xfce.thunar-volman
       xfce.thunar-archive-plugin
       xfce.thunar-media-tags-plugin
+
+      # gnome-keyring
+      # xdg-utils
+      # xdg-desktop-portal-wlr
 
     ] ++ config.desktop.sway.extraPackages;
 
@@ -116,11 +138,13 @@
 
     # Allow users to mount filesystems
     programs.fuse.userAllowOther = true;
-    
+
     # Sway-specific environment variables
     environment.sessionVariables = {
+      NIXOS_OZONE_WL = "1"; # electron & chromium wayland
       MOZ_ENABLE_WAYLAND = "1";
       XDG_CURRENT_DESKTOP = "sway";
+      # GTK_USE_PORTAL = "1";
     };
   };
 }
