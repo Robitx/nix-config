@@ -60,7 +60,7 @@
 
   environment.systemPackages = with pkgs; [
     mangohud
-    protonup
+    protonup-ng
   ];
 
   programs.gamemode.enable = true;
@@ -92,7 +92,7 @@
     user = "ollama";
     group = "ollama";
     enable = true;
-    acceleration = "cuda";
+    # acceleration = "cuda";
     models = "/backup/ollama_models";
   };
 

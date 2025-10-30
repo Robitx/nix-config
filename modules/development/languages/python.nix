@@ -68,6 +68,7 @@
         matplotlib
         scipy
         scikit-learn
+        torch
         
       ] ++ lib.optionals config.development.languages.python.enableJupyter [
         # Jupyter ecosystem

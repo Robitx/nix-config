@@ -30,7 +30,7 @@
 
     extraPackages = lib.mkOption {
       type = lib.types.listOf lib.types.package;
-      default = [];
+      default = [ ];
       description = "Additional container-related packages";
     };
   };
@@ -40,10 +40,15 @@
     virtualisation.docker = lib.mkIf config.development.containers.enableDocker {
       enable = true;
       enableOnBoot = lib.mkDefault true;
-      
+
       # Use systemd-resolved for DNS in containers
       daemon.settings = {
-        dns = [ "127.0.0.53" ];
+        dns = [
+          "10.3.12.124" # Primary corporate DNS
+          "10.3.12.125" # Secondary corporate DNS
+          "192.168.86.2" # Local network DNS for public lookups
+          # "127.0.0.53"
+        ];
       };
     };
 
@@ -57,20 +62,20 @@
     environment.systemPackages = with pkgs; [
       # Container composition
       docker-compose
-      
+
     ] ++ lib.optionals config.development.containers.enableDevContainers [
       # Development containers
       devpod
-      
+
     ] ++ lib.optionals config.development.containers.enableCI [
       # CI/CD tools
-      act  # Run GitHub Actions locally
-      
+      act # Run GitHub Actions locally
+
     ] ++ config.development.containers.extraPackages;
 
     # Add users to docker group if Docker is enabled
     users.extraGroups = lib.mkIf config.development.containers.enableDocker {
-      docker = {};
+      docker = { };
     };
 
     # Useful container aliases
@@ -83,7 +88,7 @@
         dlog = "docker logs -f";
         dclean = "docker system prune -af";
       })
-      
+
       (lib.mkIf config.development.containers.enablePodman {
         pps = "podman ps";
         ppa = "podman ps -a";

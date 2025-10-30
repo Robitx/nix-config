@@ -67,7 +67,7 @@
       libnotify
 
       # Application launcher (Sway-compatible)
-      rofi-wayland
+      rofi
       wofi
 
       # Wallpaper

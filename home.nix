@@ -11,6 +11,8 @@ in
     inputs.impermanence.nixosModules.home-manager.impermanence
   ];
 
+  nixpkgs.overlays = [ inputs.neovim-nightly-overlay.overlays.default ];
+
   home.username = "tibor";
   home.homeDirectory = "/home/tibor";
 
@@ -47,6 +49,7 @@ in
       ".ssh"
       ".thunderbird"
       ".tmux/plugins"
+      ".cargo"
       "Documents"
       "Downloads"
       "Music"
@@ -185,7 +188,8 @@ in
 
   # Editor configuration
   programs.neovim = {
-    package = inputs.nixpkgs-stable.legacyPackages.${pkgs.system}.neovim-unwrapped;
+    # package = inputs.nixpkgs-stable.legacyPackages.${pkgs.system}.neovim-unwrapped;
+    package = inputs.neovim-nightly-overlay.packages.${pkgs.system}.default;
     enable = true;
     viAlias = true;
     vimAlias = true;

@@ -32,6 +32,7 @@
       jq
       yq
       pup
+      graphviz
       
       # Network tools
       curl

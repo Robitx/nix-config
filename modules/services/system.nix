@@ -36,14 +36,14 @@
   };
 
   config = lib.mkIf config.services.system.optimizeSystemd {
-    systemd.extraConfig = ''
-      DefaultLimitNOFILE=${toString config.services.system.fileDescriptorLimit}
-      DefaultLimitMEMLOCK=infinity
-      DefaultTimeoutStopSec=${config.services.system.timeoutStop}
-      DefaultTimeoutAbortSec=${config.services.system.timeoutAbort}
-      RebootWatchdogSec=${config.services.system.rebootWatchdog}
-      ShutdownWatchdogSec=${config.services.system.shutdownWatchdog}
-    '';
+    systemd.settings.Manager = {
+      DefaultLimitNOFILE = "${toString config.services.system.fileDescriptorLimit}";
+      DefaultLimitMEMLOCK = "infinity";
+      DefaultTimeoutStopSec = "${config.services.system.timeoutStop}";
+      DefaultTimeoutAbortSec = "${config.services.system.timeoutAbort}";
+      RebootWatchdogSec = "${config.services.system.rebootWatchdog}";
+      ShutdownWatchdogSec = "${config.services.system.shutdownWatchdog}";
+    };
 
     systemd.user.extraConfig = ''
       DefaultLimitNOFILE=${toString config.services.system.fileDescriptorLimit}
