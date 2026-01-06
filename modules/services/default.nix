@@ -26,8 +26,5 @@
       nssmdns4 = true;
       openFirewall = true;
     };
-
-    # Enable Docker
-    virtualisation.docker.enable = true;
   };
 }
