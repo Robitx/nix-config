@@ -5,7 +5,7 @@ let
 in
 
 {
-  home.stateVersion = "25.05";
+  home.stateVersion = "25.11";
 
   imports = [
     inputs.impermanence.nixosModules.home-manager.impermanence
@@ -177,8 +177,8 @@ in
       ignoreSpace = true;
       path = "/persist/sync/.zsh_history";
       share = true;
-      size = 16777216;
-      save = 8388608;
+      size = 67108864;
+      save = 33554432;
     };
 
     localVariables = {

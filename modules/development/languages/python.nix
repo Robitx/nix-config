@@ -102,7 +102,7 @@
         pysocks
         minio
         networkx
-        z3
+        z3-solver
         # opencv4
         beautysh
         

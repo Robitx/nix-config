@@ -105,7 +105,7 @@
         setuptools
         scipy
         scikit-learn
-        z3
+        z3-solver
         scapy
         # opencv4
       ]))
