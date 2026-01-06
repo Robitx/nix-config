@@ -110,10 +110,10 @@
       networkmanagerapplet
 
       # File manager (same as Hyprland config)
-      xfce.thunar
-      xfce.thunar-volman
-      xfce.thunar-archive-plugin
-      xfce.thunar-media-tags-plugin
+      thunar
+      thunar-volman
+      thunar-archive-plugin
+      thunar-media-tags-plugin
 
       # gnome-keyring
       # xdg-utils
@@ -125,7 +125,7 @@
     programs.xfconf.enable = true;
     programs.thunar = {
       enable = true;
-      plugins = with pkgs.xfce; [
+      plugins = with pkgs; [
         thunar-volman
         thunar-archive-plugin
         thunar-media-tags-plugin

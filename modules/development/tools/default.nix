@@ -5,6 +5,7 @@
     ./vscode.nix
     ./git.nix
     ./kubernetes.nix
+    ./opencode.nix
   ];
 
   # This module aggregates all development tools

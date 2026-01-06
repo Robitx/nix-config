@@ -26,7 +26,7 @@ in
       ".config/github-copilot"
       ".config/google-chrome"
       ".config/hypr"
-      ".config/sway"  # Added Sway config directory
+      ".config/sway" # Added Sway config directory
       ".config/libreoffice"
       ".config/qBittorrent"
       ".config/PrusaSlicer"
@@ -227,13 +227,15 @@ in
   home.file.".config/git/config.szn".source = config.lib.file.mkOutOfStoreSymlink "/persist/nix-config/dotfiles/.config/git/config.szn";
   home.file.".config/nvim".source = config.lib.file.mkOutOfStoreSymlink /persist/nvim;
   home.file.".config/nvim".recursive = true;
+  home.file.".config/opencode".source = config.lib.file.mkOutOfStoreSymlink "/persist/nix-config/dotfiles/.config/opencode";
+  home.file.".config/opencode".recursive = true;
   home.file.".config/kitty/kitty.conf".source = config.lib.file.mkOutOfStoreSymlink "/persist/nix-config/dotfiles/.config/kitty/kitty.conf";
   home.file.".ssh/config".source = config.lib.file.mkOutOfStoreSymlink /persist/nix-config/dotfiles/.ssh/config;
   home.file.".config/hypr/hyprpaper.conf".source = config.lib.file.mkOutOfStoreSymlink "/persist/nix-config/dotfiles/.config/hypr/hyprpaper.conf";
   # home.file.".config/hypr/hyprland.conf".source = config.lib.file.mkOutOfStoreSymlink "/persist/nix-config/dotfiles/.config/hypr/hyprland.conf";
   home.file.".config/waybar/config".source = config.lib.file.mkOutOfStoreSymlink "/persist/nix-config/dotfiles/.config/waybar/config";
   home.file.".config/waybar/style.css".source = config.lib.file.mkOutOfStoreSymlink "/persist/nix-config/dotfiles/.config/waybar/style.css";
-  
+
   # Add Sway config file
   home.file.".config/sway/config".source = config.lib.file.mkOutOfStoreSymlink "/persist/nix-config/dotfiles/.config/sway/config";
   # home.file.".config/i3status/config".source = config.lib.file.mkOutOfStoreSymlink "/persist/nix-config/dotfiles/.config/i3status/config";

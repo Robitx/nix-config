@@ -65,6 +65,9 @@
         enable = true;
         enableHelm = true;
       };
+      opencode = {
+        enable = true;
+      };
     };
     containers = {
       enable = true;

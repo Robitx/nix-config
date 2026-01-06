@@ -56,10 +56,10 @@ in
       wl-clip-persist
 
       # File manager
-      xfce.thunar
-      xfce.thunar-volman
-      xfce.thunar-archive-plugin
-      xfce.thunar-media-tags-plugin
+      thunar
+      thunar-volman
+      thunar-archive-plugin
+      thunar-media-tags-plugin
 
     ] ++ config.desktop.hyprland.extraPackages;
 
@@ -67,7 +67,7 @@ in
     programs.xfconf.enable = true;
     programs.thunar = {
       enable = true;
-      plugins = with pkgs.xfce; [
+      plugins = with pkgs; [
         thunar-volman
         thunar-archive-plugin
         thunar-media-tags-plugin
