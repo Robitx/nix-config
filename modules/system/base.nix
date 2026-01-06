@@ -1,7 +1,7 @@
 { config, lib, pkgs, ... }:
 
 {
-  system.stateVersion = "25.05";
+  system.stateVersion = "25.11";
 
   time.timeZone = "Europe/Prague";
   i18n.defaultLocale = "en_US.UTF-8";
