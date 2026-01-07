@@ -12,6 +12,7 @@
 
   nix.settings = {
     experimental-features = [ "nix-command" "flakes" ];
+    download-buffer-size = 268435456; # 256 MiB (default is 64 MiB)
   };
 
   environment.variables.EDITOR = "nvim";

@@ -1,7 +1,9 @@
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, inputs, ... }:
 
 {
   nixpkgs.overlays = [
+    # Neovim nightly overlay
+    inputs.neovim-nightly-overlay.overlays.default
     # Have the current version of tmux replaces until the next release.
     # Waiting on this to be in the upsteam: https://github.com/tmux/tmux/pull/3958
     (final: prev: {

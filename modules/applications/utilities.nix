@@ -10,6 +10,7 @@
       fileComparison = lib.mkEnableOption "file comparison tool (meld)";
       calendar = lib.mkEnableOption "command line calendar (ccal)";
       systemInfo = lib.mkEnableOption "hardware information tools";
+      rpiImager = lib.mkEnableOption "Raspberry Pi Imager";
     };
     
     network = {
@@ -32,6 +33,8 @@
       ccal
     ] ++ lib.optionals config.applications.utilities.system.systemInfo [
       lshw
+    ] ++ lib.optionals config.applications.utilities.system.rpiImager [
+      rpi-imager
     ] ++ lib.optionals config.applications.utilities.network.basic [
       inetutils
       dnsutils

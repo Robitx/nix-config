@@ -123,6 +123,7 @@
         fileComparison = true;
         calendar = true;
         systemInfo = true;
+        rpiImager = true;
       };
       network = {
         basic = true;

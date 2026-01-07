@@ -1,24 +1,17 @@
 { config, lib, pkgs, secrets, osConfig, inputs, ... }:
 
 let
-  inherit (inputs.hyprland.packages.${pkgs.system}) hyprland xdg-desktop-portal-hyprland;
+  inherit (inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}) hyprland xdg-desktop-portal-hyprland;
 in
 
 {
   home.stateVersion = "25.11";
 
-  imports = [
-    inputs.impermanence.nixosModules.home-manager.impermanence
-  ];
-
-  nixpkgs.overlays = [ inputs.neovim-nightly-overlay.overlays.default ];
-
   home.username = "tibor";
   home.homeDirectory = "/home/tibor";
 
   # Persistence configuration
-  home.persistence."/persist/home/tibor" = {
-    removePrefixDirectory = false;
+  home.persistence."/persist/home" = {
     directories = [
       ".cache"
       ".config/Signal"
@@ -65,7 +58,6 @@ in
       ".screenrc"
       ".bash_history"
     ];
-    allowOther = true;
   };
 
   # Theme and cursor configuration
@@ -191,8 +183,8 @@ in
 
   # Editor configuration
   programs.neovim = {
-    # package = inputs.nixpkgs-stable.legacyPackages.${pkgs.system}.neovim-unwrapped;
-    package = inputs.neovim-nightly-overlay.packages.${pkgs.system}.default;
+    # package = inputs.nixpkgs-stable.legacyPackages.${pkgs.stdenv.hostPlatform.system}.neovim-unwrapped;
+    package = inputs.neovim-nightly-overlay.packages.${pkgs.stdenv.hostPlatform.system}.default;
     enable = true;
     viAlias = true;
     vimAlias = true;
