@@ -42,6 +42,7 @@ in
       ".local/share/keyrings"
       ".local/share/nvim"
       ".local/share/antigravity"
+      ".local/share/opencode"
       ".local/share/qBittorrent"
       ".local/state/nvim"
       ".local/state/syncthing"
