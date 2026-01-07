@@ -68,6 +68,7 @@
       opencode = {
         enable = true;
       };
+      antigravity-fhs.enable = true;
     };
     containers = {
       enable = true;
