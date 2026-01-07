@@ -11,7 +11,7 @@ in
   home.homeDirectory = "/home/tibor";
 
   # Persistence configuration
-  home.persistence."/persist/home" = {
+  home.persistence."/persist" = {
     directories = [
       ".cache"
       ".config/Signal"
