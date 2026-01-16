@@ -34,7 +34,21 @@
     ] ++ lib.optionals config.applications.utilities.system.systemInfo [
       lshw
     ] ++ lib.optionals config.applications.utilities.system.rpiImager [
-      rpi-imager
+      (pkgs.writeShellScriptBin "rpi-imager" ''
+        # Preserve Wayland environment for GUI apps running as root
+        export QT_QPA_PLATFORM=wayland
+        export WAYLAND_DISPLAY=''${WAYLAND_DISPLAY:-wayland-1}
+        export XDG_RUNTIME_DIR=''${XDG_RUNTIME_DIR:-/run/user/$(id -u)}
+        exec ${pkgs.rpi-imager}/bin/rpi-imager "$@"
+      '')
+      (pkgs.writeShellScriptBin "rpi-imager-root" ''
+        # Run rpi-imager with elevated privileges preserving Wayland session
+        exec sudo -E env \
+          WAYLAND_DISPLAY=''${WAYLAND_DISPLAY:-wayland-1} \
+          XDG_RUNTIME_DIR=/run/user/$(id -u) \
+          QT_QPA_PLATFORM=wayland \
+          ${pkgs.rpi-imager}/bin/rpi-imager "$@"
+      '')
     ] ++ lib.optionals config.applications.utilities.network.basic [
       inetutils
       dnsutils
