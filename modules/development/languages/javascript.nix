@@ -17,7 +17,7 @@
     };
 
     packageManager = lib.mkOption {
-      type = lib.types.enum [ "npm" "yarn" "pnpm" ];
+      type = lib.types.enum [ "npm" "yarn" "pnpm" "bun" ];
       default = "npm";
       description = "JavaScript package manager to install";
     };
@@ -50,6 +50,9 @@
       
     ] ++ lib.optionals (config.development.languages.javascript.packageManager == "pnpm") [
       nodePackages.pnpm
+      
+    ] ++ lib.optionals (config.development.languages.javascript.packageManager == "bun") [
+      bun
       
     ] ++ config.development.languages.javascript.extraPackages;
 

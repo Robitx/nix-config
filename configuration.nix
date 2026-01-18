@@ -43,6 +43,7 @@
         enable = true;
         enableTypeScript = true;
         nodeVersion = "nodejs_24";
+        packageManager = "bun";
       };
       lua = {
         enable = true;
