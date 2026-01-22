@@ -37,9 +37,10 @@ in
       ".local/share/antigravity"
       ".local/share/opencode"
       ".local/share/opencode-work"
-      ".local/share/opencode-personal"
       ".local/share/qBittorrent"
       ".local/state/nvim"
+      ".local/state/opencode"
+      ".local/state/opencode-work"
       ".local/state/syncthing"
       ".mozilla"
       ".nixops"
@@ -228,8 +229,6 @@ in
   home.file.".config/opencode".recursive = true;
   home.file.".config/opencode-work".source = config.lib.file.mkOutOfStoreSymlink "/persist/nix-config/dotfiles/.config/opencode-work";
   home.file.".config/opencode-work".recursive = true;
-  home.file.".config/opencode-personal".source = config.lib.file.mkOutOfStoreSymlink "/persist/nix-config/dotfiles/.config/opencode-personal";
-  home.file.".config/opencode-personal".recursive = true;
   home.file.".config/kitty/kitty.conf".source = config.lib.file.mkOutOfStoreSymlink "/persist/nix-config/dotfiles/.config/kitty/kitty.conf";
   home.file.".ssh/config".source = config.lib.file.mkOutOfStoreSymlink /persist/nix-config/dotfiles/.ssh/config;
   home.file.".config/hypr/hyprpaper.conf".source = config.lib.file.mkOutOfStoreSymlink "/persist/nix-config/dotfiles/.config/hypr/hyprpaper.conf";

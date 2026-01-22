@@ -96,6 +96,7 @@
         tzlocal
         certifi
         docopt
+        termcolor
         elastic-transport
         elasticsearch
         elasticsearch-dsl
