@@ -26,5 +26,19 @@
       nssmdns4 = true;
       openFirewall = true;
     };
+
+    # Early OOM daemon - kills processes before system becomes unresponsive
+    services.earlyoom = {
+      enable = true;
+      enableNotifications = true; # Show notifications when killing processes
+      freeMemThreshold = 10; # Minimum available memory percentage
+      freeSwapThreshold = 10; # Minimum available swap percentage
+    };
+
+    # zram - compressed swap in RAM
+    zramSwap = {
+      enable = true;
+      memoryPercent = 50; # Use up to 50% of RAM for compressed swap
+    };
   };
 }
