@@ -51,7 +51,7 @@
       };
       c = {
         enable = true;
-        compiler = "clang";
+        compiler = "both";
         enableDebugTools = true;
       };
     };
