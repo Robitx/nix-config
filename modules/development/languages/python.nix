@@ -69,6 +69,7 @@
         scipy
         scikit-learn
         torch
+        pyarrow
         
       ] ++ lib.optionals config.development.languages.python.enableJupyter [
         # Jupyter ecosystem
@@ -106,6 +107,7 @@
         z3-solver
         # opencv4
         beautysh
+        huggingface-hub
         
       ] ++ (config.development.languages.python.extraPackages p)))
     ];
