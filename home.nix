@@ -90,6 +90,51 @@ in
     };
   };
 
+  # XDG MIME type associations
+  xdg.mimeApps = {
+    enable = true;
+    defaultApplications = {
+      "text/html" = "google-chrome.desktop";
+      "x-scheme-handler/http" = "google-chrome.desktop";
+      "x-scheme-handler/https" = "google-chrome.desktop";
+      "x-scheme-handler/about" = "google-chrome.desktop";
+      "x-scheme-handler/unknown" = "google-chrome.desktop";
+      "x-scheme-handler/mailto" = "thunderbird.desktop";
+      "x-scheme-handler/sgnl" = "signal.desktop";
+      "x-scheme-handler/signalcaptcha" = "signal.desktop";
+      "application/pdf" = "org.pwmt.zathura.desktop";
+      "image/png" = "imv.desktop";
+      "image/jpeg" = "imv.desktop";
+      "image/gif" = "imv.desktop";
+      "video/mp4" = "vlc.desktop";
+      "video/x-matroska" = "vlc.desktop";
+      "audio/mpeg" = "vlc.desktop";
+      "audio/flac" = "vlc.desktop";
+    };
+    associations.added = {
+      "text/html" = "google-chrome.desktop";
+      "x-scheme-handler/http" = "google-chrome.desktop";
+      "x-scheme-handler/https" = "google-chrome.desktop";
+      "x-scheme-handler/about" = "google-chrome.desktop";
+      "x-scheme-handler/unknown" = "google-chrome.desktop";
+      "x-scheme-handler/mailto" = "thunderbird.desktop";
+      "x-scheme-handler/sgnl" = "signal.desktop";
+      "x-scheme-handler/signalcaptcha" = "signal.desktop";
+      "application/pdf" = "org.pwmt.zathura.desktop";
+      "image/png" = "imv.desktop";
+      "image/jpeg" = "imv.desktop";
+      "image/gif" = "imv.desktop";
+      "video/mp4" = "vlc.desktop";
+      "video/x-matroska" = "vlc.desktop";
+      "audio/mpeg" = "vlc.desktop";
+      "audio/flac" = "vlc.desktop";
+    };
+  };
+
+  # Force overwrite existing mimeapps.list files
+  xdg.configFile."mimeapps.list".force = true;
+  xdg.dataFile."applications/mimeapps.list".force = true;
+
   # Services
   services.syncthing.enable = true;
   services.ssh-agent.enable = true;

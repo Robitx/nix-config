@@ -27,7 +27,7 @@
     programs.xwayland.enable = true;
     programs.sway = {
       enable = true;
-      # wrapperFeatures.gtk = true;
+      wrapperFeatures.gtk = true;
       # xwayland.enable = true;
       extraOptions = [ "--unsupported-gpu" ];
       extraSessionCommands = ''
@@ -51,7 +51,17 @@
       enable = true;
       xdgOpenUsePortal = true;
       wlr.enable = true;
-      # extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+      extraPortals = [
+        pkgs.xdg-desktop-portal
+        pkgs.xdg-desktop-portal-gtk
+      ];
+      config = {
+        common = {
+          default = [ "gtk" ];
+          "org.freedesktop.impl.portal.Screenshot" = [ "wlr" ];
+          "org.freedesktop.impl.portal.ScreenCast" = [ "wlr" ];
+        };
+      };
     };
 
     # Hardware graphics acceleration

@@ -85,7 +85,8 @@
     browsers = {
       enable = true;
       chrome = true;
-      vivaldi = true;
+      firefox = true;
+      # vivaldi = true;
       defaultBrowser = "chrome";
     };
     communication = {
