@@ -1,0 +1,19 @@
+# k3s server configuration
+# See: https://docs.k3s.io/reference/server-config
+
+# Disable built-in components (optional - uncomment what you don't need)
+# disable:
+#   - traefik
+#   - servicelb
+#   - local-storage
+
+# Network options
+# cluster-cidr: "10.42.0.0/16"
+# service-cidr: "10.43.0.0/16"
+
+# Write kubeconfig with appropriate permissions
+write-kubeconfig-mode: "0644"
+
+# Disable various features (uncomment as needed)
+# disable-cloud-controller: true
+# disable-network-policy: true

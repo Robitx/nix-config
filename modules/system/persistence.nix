@@ -13,6 +13,7 @@
       "/var/lib/nixos"
       "/var/lib/systemd/coredump"
       "/var/lib/tailscale"
+      "/var/lib/rancher"  # k3s data
       "/etc/NetworkManager/system-connections"
       {
         directory = "/var/lib/colord";

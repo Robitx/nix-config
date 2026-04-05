@@ -5,6 +5,7 @@
     ./vscode.nix
     ./git.nix
     ./kubernetes.nix
+    ./k3s.nix
     ./opencode.nix
     ./antigravity-fhs.nix
   ];

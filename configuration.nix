@@ -66,6 +66,9 @@
         enable = true;
         enableHelm = true;
       };
+      k3s = {
+        enable = true;
+      };
       opencode = {
         enable = true;
       };

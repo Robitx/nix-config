@@ -35,8 +35,8 @@
       pkgs.${config.development.languages.javascript.nodeVersion}
       
       # Language servers and tools
-      nodePackages.typescript-language-server
-      nodePackages.bash-language-server
+      typescript-language-server
+      bash-language-server
       
       # Linting and formatting
       eslint_d
@@ -49,7 +49,7 @@
       yarn
       
     ] ++ lib.optionals (config.development.languages.javascript.packageManager == "pnpm") [
-      nodePackages.pnpm
+      pnpm
       
     ] ++ lib.optionals (config.development.languages.javascript.packageManager == "bun") [
       bun
