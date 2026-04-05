@@ -16,6 +16,7 @@ in
       ".cache"
       ".config/Signal"
       ".config/dconf"
+      ".config/ghostty"
       ".config/github-copilot"
       ".config/google-chrome"
       ".config/hypr"
@@ -77,6 +78,10 @@ in
   gtk = {
     enable = true;
     theme = {
+      package = pkgs.flat-remix-gtk;
+      name = "Flat-Remix-GTK-Grey-Darkest";
+    };
+    gtk4.theme = {
       package = pkgs.flat-remix-gtk;
       name = "Flat-Remix-GTK-Grey-Darkest";
     };
@@ -277,6 +282,7 @@ in
   home.file.".config/opencode".recursive = true;
   home.file.".config/opencode-work".source = config.lib.file.mkOutOfStoreSymlink "/persist/nix-config/dotfiles/.config/opencode-work";
   home.file.".config/opencode-work".recursive = true;
+  home.file.".config/ghostty/config.ghostty".source = config.lib.file.mkOutOfStoreSymlink "/persist/nix-config/dotfiles/.config/ghostty/config.ghostty";
   home.file.".config/kitty/kitty.conf".source = config.lib.file.mkOutOfStoreSymlink "/persist/nix-config/dotfiles/.config/kitty/kitty.conf";
   home.file.".ssh/config".source = config.lib.file.mkOutOfStoreSymlink /persist/nix-config/dotfiles/.ssh/config;
   home.file.".config/hypr/hyprpaper.conf".source = config.lib.file.mkOutOfStoreSymlink "/persist/nix-config/dotfiles/.config/hypr/hyprpaper.conf";

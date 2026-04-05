@@ -126,6 +126,7 @@
         calendar = true;
         systemInfo = true;
         rpiImager = true;
+        dialog = true;
       };
       network = {
         basic = true;
@@ -139,5 +140,9 @@
   services = {
     enable = true;
     system.optimizeSystemd = true;
+    networking.tailscale = {
+      enable = true;
+      useRoutingFeatures = "server"; # Allow other devices to connect to this desktop
+    };
   };
 }

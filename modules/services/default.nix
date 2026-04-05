@@ -3,6 +3,7 @@
 {
   imports = [
     ./system.nix
+    ./tailscale.nix
     # Only include custom service modules here
     # Built-in services (openssh, printing, plex, ollama) are configured directly
   ];

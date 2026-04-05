@@ -11,6 +11,7 @@
       calendar = lib.mkEnableOption "command line calendar (ccal)";
       systemInfo = lib.mkEnableOption "hardware information tools";
       rpiImager = lib.mkEnableOption "Raspberry Pi Imager";
+      dialog = lib.mkEnableOption "dialog boxes from shell";
     };
     
     network = {
@@ -49,6 +50,8 @@
           QT_QPA_PLATFORM=wayland \
           ${pkgs.rpi-imager}/bin/rpi-imager "$@"
       '')
+    ] ++ lib.optionals config.applications.utilities.system.dialog [
+      dialog
     ] ++ lib.optionals config.applications.utilities.network.basic [
       inetutils
       dnsutils

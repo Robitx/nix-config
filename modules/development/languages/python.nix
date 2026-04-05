@@ -83,6 +83,7 @@
         aiohttp
         urllib3
         websockets
+        httpx
         
       ] ++ lib.optionals config.development.languages.python.enableSecurity [
         # Security tools

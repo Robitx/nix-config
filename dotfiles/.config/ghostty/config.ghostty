@@ -1,0 +1,6 @@
+# Ghostty Configuration
+
+# Keybindings
+# Using escape sequence approach that works reliably with tmux
+# See: https://github.com/anthropics/claude-code/issues/1282
+keybind = shift+enter=text:\x1b\r

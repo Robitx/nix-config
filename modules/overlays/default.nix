@@ -4,19 +4,6 @@
   nixpkgs.overlays = [
     # Neovim nightly overlay
     inputs.neovim-nightly-overlay.overlays.default
-    # Have the current version of tmux replaces until the next release.
-    # Waiting on this to be in the upsteam: https://github.com/tmux/tmux/pull/3958
-    (final: prev: {
-      tmux = prev.tmux.overrideAttrs (old: {
-        src = final.fetchFromGitHub {
-          owner = old.src.owner;
-          repo = old.src.repo;
-          rev = "5039be657c4263f2539a149199cbc8d6780df1c3";
-          hash = "sha256-oH8TTifPSim0b6FJNss6H7IOODjzsj9vBIndT0quvuo=";
-        };
-        patches = [ ];
-      });
-    })
     (final: prev: {
       cliphist = prev.cliphist.overrideAttrs (_old: {
         src = final.fetchFromGitHub {
