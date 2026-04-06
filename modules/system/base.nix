@@ -6,7 +6,28 @@
   time.timeZone = "Europe/Prague";
   i18n.defaultLocale = "en_US.UTF-8";
 
-  networking.networkmanager.enable = true;
+  networking.networkmanager = {
+    enable = true;
+    dns = "systemd-resolved";
+  };
+
+  services.resolved = {
+    enable = true;
+    settings.Resolve = {
+      # Disabled: corporate DNS doesn't support DNSSEC for internal zones and
+      # returns malformed responses that cause resolved to hang indefinitely.
+      # allow-downgrade is insufficient — it only handles missing DNSSEC, not
+      # broken DNSSEC responses.
+      DNSSEC = "no";
+      FallbackDNS = [ "1.1.1.1" "9.9.9.9" ];
+    };
+  };
+
+  # Point /etc/resolv.conf at systemd-resolved stub (127.0.0.53).
+  # This gives Docker BuildKit and all containers correct DNS in all
+  # network contexts: home, work VPN, tailscale.
+  environment.etc."resolv.conf".source =
+    "/run/systemd/resolve/stub-resolv.conf";
 
   nixpkgs.config.allowUnfree = true;
 

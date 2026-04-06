@@ -134,6 +134,7 @@
       network = {
         basic = true;
         vpn = true;
+        security = true;
       };
       packageManager = true;
     };

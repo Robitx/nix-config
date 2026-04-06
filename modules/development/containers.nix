@@ -41,14 +41,11 @@
       enable = true;
       enableOnBoot = lib.mkDefault true;
 
-      # Use systemd-resolved for DNS in containers
       daemon.settings = {
-        dns = [
-          "10.3.12.124" # Primary corporate DNS
-          "10.3.12.125" # Secondary corporate DNS
-          "192.168.86.2" # Local network DNS for public lookups
-          # "127.0.0.53"
-        ];
+        # Point at systemd-resolved stub — works in all network contexts
+        # (home, work VPN, tailscale) without hardcoding any IPs.
+        dns = [ "127.0.0.53" ];
+        dns-opt = [ "ndots:0" ];
       };
     };
 

@@ -63,6 +63,8 @@
     ] ++ lib.optionals config.applications.utilities.network.vpn [
       openvpn
       openssl
+    ] ++ lib.optionals config.applications.utilities.network.security [
+      tcpdump
     ] ++ lib.optionals config.applications.utilities.packageManager [
       nurl
       nh
