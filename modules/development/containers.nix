@@ -42,9 +42,12 @@
       enableOnBoot = lib.mkDefault true;
 
       daemon.settings = {
-        # Point at systemd-resolved stub — works in all network contexts
-        # (home, work VPN, tailscale) without hardcoding any IPs.
-        dns = [ "127.0.0.53" ];
+        # 172.17.0.1 is the Docker bridge gateway — the host IP as seen from
+        # inside build containers. 127.0.0.53 is bound to the host loopback
+        # and unreachable from container network namespaces.
+        # systemd-resolved is configured to also listen on 172.17.0.1 (see
+        # services.resolved.extraListenAddresses in base.nix).
+        dns = [ "172.17.0.1" ];
         dns-opt = [ "ndots:0" ];
       };
     };

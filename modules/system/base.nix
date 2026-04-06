@@ -16,12 +16,24 @@
     settings.Resolve = {
       # Disabled: corporate DNS doesn't support DNSSEC for internal zones and
       # returns malformed responses that cause resolved to hang indefinitely.
-      # allow-downgrade is insufficient — it only handles missing DNSSEC, not
-      # broken DNSSEC responses.
       DNSSEC = "no";
       FallbackDNS = [ "1.1.1.1" "9.9.9.9" ];
+      # Also listen on the Docker bridge gateway so build containers can reach
+      # resolved. 127.0.0.53 is bound to loopback — unreachable from container
+      # network namespaces. 172.17.0.1 is the host as seen from inside containers.
+      DNSStubListenerExtra = "172.17.0.1";
     };
   };
+
+  # Local development hostnames — maps k3s/Traefik ingress hosts to the
+  # ingress IP so browsers can reach them without editing /etc/hosts manually.
+  networking.extraHosts = ''
+    192.168.86.143  api.cogiter.local
+  '';
+
+  # Allow Docker containers to reach systemd-resolved on the bridge gateway.
+  networking.firewall.interfaces."docker0".allowedUDPPorts = [ 53 ];
+  networking.firewall.interfaces."docker0".allowedTCPPorts = [ 53 ];
 
   # Point /etc/resolv.conf at systemd-resolved stub (127.0.0.53).
   # This gives Docker BuildKit and all containers correct DNS in all
