@@ -115,6 +115,21 @@ in
       "video/x-matroska" = "vlc.desktop";
       "audio/mpeg" = "vlc.desktop";
       "audio/flac" = "vlc.desktop";
+      # LibreOffice Writer - Word documents
+      "application/msword" = "writer.desktop";
+      "application/vnd.openxmlformats-officedocument.wordprocessingml.document" = "writer.desktop";
+      "application/vnd.openxmlformats-officedocument.wordprocessingml.template" = "writer.desktop";
+      "application/vnd.oasis.opendocument.text" = "writer.desktop";
+      # LibreOffice Calc - Spreadsheets
+      "application/vnd.ms-excel" = "calc.desktop";
+      "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" = "calc.desktop";
+      "application/vnd.openxmlformats-officedocument.spreadsheetml.template" = "calc.desktop";
+      "application/vnd.oasis.opendocument.spreadsheet" = "calc.desktop";
+      # LibreOffice Impress - Presentations
+      "application/vnd.ms-powerpoint" = "impress.desktop";
+      "application/vnd.openxmlformats-officedocument.presentationml.presentation" = "impress.desktop";
+      "application/vnd.openxmlformats-officedocument.presentationml.template" = "impress.desktop";
+      "application/vnd.oasis.opendocument.presentation" = "impress.desktop";
     };
     associations.added = {
       "text/html" = "google-chrome.desktop";
@@ -133,6 +148,21 @@ in
       "video/x-matroska" = "vlc.desktop";
       "audio/mpeg" = "vlc.desktop";
       "audio/flac" = "vlc.desktop";
+      # LibreOffice Writer - Word documents
+      "application/msword" = "writer.desktop";
+      "application/vnd.openxmlformats-officedocument.wordprocessingml.document" = "writer.desktop";
+      "application/vnd.openxmlformats-officedocument.wordprocessingml.template" = "writer.desktop";
+      "application/vnd.oasis.opendocument.text" = "writer.desktop";
+      # LibreOffice Calc - Spreadsheets
+      "application/vnd.ms-excel" = "calc.desktop";
+      "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" = "calc.desktop";
+      "application/vnd.openxmlformats-officedocument.spreadsheetml.template" = "calc.desktop";
+      "application/vnd.oasis.opendocument.spreadsheet" = "calc.desktop";
+      # LibreOffice Impress - Presentations
+      "application/vnd.ms-powerpoint" = "impress.desktop";
+      "application/vnd.openxmlformats-officedocument.presentationml.presentation" = "impress.desktop";
+      "application/vnd.openxmlformats-officedocument.presentationml.template" = "impress.desktop";
+      "application/vnd.oasis.opendocument.presentation" = "impress.desktop";
     };
   };
 
@@ -190,6 +220,9 @@ in
       update-safe = "sudo nix flake update nixpkgs home-manager; update";
       history = "history 0";
       history-stat = "history | awk '{print \\$2}' | sort | uniq -c | sort -n -r | head";
+      vi = "nvim";
+      vim = "nvim";
+      vimdiff = "nvim -d";
     };
 
     # Your working init configuration
@@ -237,15 +270,10 @@ in
     };
   };
 
-  # Editor configuration
-  programs.neovim = {
-    # package = inputs.nixpkgs-stable.legacyPackages.${pkgs.stdenv.hostPlatform.system}.neovim-unwrapped;
-    package = inputs.neovim-nightly-overlay.packages.${pkgs.stdenv.hostPlatform.system}.default;
-    enable = true;
-    viAlias = true;
-    vimAlias = true;
-    vimdiffAlias = true;
-  };
+  # Editor configuration - package only, config managed externally at /persist/nvim
+  home.packages = [
+    inputs.neovim-nightly-overlay.packages.${pkgs.stdenv.hostPlatform.system}.default
+  ];
 
   # Hyprland configuration (only if enabled at system level)
   wayland.windowManager.hyprland = lib.mkIf osConfig.desktop.hyprland.enable {
@@ -277,7 +305,6 @@ in
   home.file.".config/git/config".source = config.lib.file.mkOutOfStoreSymlink "/persist/nix-config/dotfiles/.config/git/config";
   home.file.".config/git/config.szn".source = config.lib.file.mkOutOfStoreSymlink "/persist/nix-config/dotfiles/.config/git/config.szn";
   home.file.".config/nvim".source = config.lib.file.mkOutOfStoreSymlink /persist/nvim;
-  home.file.".config/nvim".recursive = true;
   home.file.".config/opencode".source = config.lib.file.mkOutOfStoreSymlink "/persist/nix-config/dotfiles/.config/opencode";
   home.file.".config/opencode".recursive = true;
   home.file.".config/opencode-work".source = config.lib.file.mkOutOfStoreSymlink "/persist/nix-config/dotfiles/.config/opencode-work";

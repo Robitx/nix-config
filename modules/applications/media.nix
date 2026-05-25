@@ -6,6 +6,7 @@
     
     graphics = {
       gimp = lib.mkEnableOption "GIMP image editor";
+      inkscape = lib.mkEnableOption "Inkscape vector graphics editor";
     };
     
     audio = {
@@ -25,6 +26,8 @@
   config = lib.mkIf config.applications.media.enable {
     environment.systemPackages = with pkgs; lib.optionals config.applications.media.graphics.gimp [
       gimp
+    ] ++ lib.optionals config.applications.media.graphics.inkscape [
+      inkscape
     ] ++ lib.optionals config.applications.media.audio.audacity [
       audacity
       (if config.applications.media.audio.enableLameSupport 

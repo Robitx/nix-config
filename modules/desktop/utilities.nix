@@ -11,6 +11,7 @@
     statusBar = lib.mkEnableOption "status bar (waybar)";
     wallpaper = lib.mkEnableOption "wallpaper manager (hyprpaper)";
     networkApplet = lib.mkEnableOption "network manager applet";
+    softwareCenter = lib.mkEnableOption "GNOME Software (file associations and app management)";
   };
 
   config = lib.mkIf config.desktop.utilities.enable {
@@ -29,6 +30,8 @@
       hyprpaper
     ] ++ lib.optionals config.desktop.utilities.networkApplet [
       networkmanagerapplet
+    ] ++ lib.optionals config.desktop.utilities.softwareCenter [
+      gnome-software
     ];
   };
 }

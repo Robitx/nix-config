@@ -100,6 +100,7 @@
     media = {
       enable = true;
       graphics.gimp = true;
+      graphics.inkscape = true;
       audio = {
         audacity = true;
         enableLameSupport = true;
