@@ -34,13 +34,14 @@
   ];
   hardware.graphics.extraPackages = with pkgs; [
     vulkan-validation-layers
+    nvidia-vaapi-driver
   ];
   hardware.nvidia = {
     powerManagement.enable = false;
     open = false;
     nvidiaSettings = true;
     modesetting.enable = true;
-    package = config.boot.kernelPackages.nvidiaPackages.latest;
+    package = config.boot.kernelPackages.nvidiaPackages.stable;
   };
 
 
