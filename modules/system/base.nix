@@ -60,11 +60,11 @@
 
   ];
 
-  security = {
-    pki.certificates = [
-      ''
-        ${builtins.readFile /persist/secrets/root2022.pem}
-      ''
-    ];
-  };
+  # security = {
+  #   pki.certificates = [
+  #     ''
+  #       ${builtins.readFile /persist/secrets/root2022.pem}
+  #     ''
+  #   ];
+  # };
 }
