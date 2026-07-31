@@ -67,7 +67,7 @@
         enableHelm = true;
       };
       k3s = {
-        enable = true;
+        enable = false; # Enable after first boot when /persist/nix-config exists
       };
       opencode = {
         enable = true;
