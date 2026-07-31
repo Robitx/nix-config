@@ -45,10 +45,10 @@
       ShutdownWatchdogSec = "${config.services.system.shutdownWatchdog}";
     };
 
-    systemd.user.extraConfig = ''
-      DefaultLimitNOFILE=${toString config.services.system.fileDescriptorLimit}
-      DefaultLimitMEMLOCK=infinity
-      DefaultTimeoutStopSec=${config.services.system.timeoutStop}
-    '';
+    systemd.user.settings.Manager = {
+      DefaultLimitNOFILE = "${toString config.services.system.fileDescriptorLimit}";
+      DefaultLimitMEMLOCK = "infinity";
+      DefaultTimeoutStopSec = "${config.services.system.timeoutStop}";
+    };
   };
 }

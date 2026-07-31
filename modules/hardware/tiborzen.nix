@@ -94,7 +94,7 @@
     group = "ollama";
     enable = true;
     # acceleration = "cuda";
-    models = "/backup/ollama_models";
+    modelsDir = "/backup/ollama_models";
   };
 
 }

@@ -149,5 +149,7 @@
       enable = true;
       useRoutingFeatures = "server"; # Allow other devices to connect to this desktop
     };
+    # Canon CanoScan LiDE 400 (genesys backend, USB)
+    scanner.enable = true;
   };
 }
