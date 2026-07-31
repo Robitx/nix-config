@@ -6,7 +6,7 @@
 
     configFile = lib.mkOption {
       type = lib.types.path;
-      default = ../../configs/k3s/config.yaml;
+      default = /persist/nix-config/configs/k3s/config.yaml;
       description = "Path to k3s config.yaml file";
     };
 
